@@ -10,7 +10,10 @@ spec:
   project: default
   source:
     repoURL: https://github.com/cloudymax/argocd-nvidia-lab.git
-    path: /prometheus
+    path: /prometheus/helm
+    helm:
+      valueFiles:
+        - values.yaml
   destination:
     server: "https://kubernetes.default.svc"
     namespace: monitoring

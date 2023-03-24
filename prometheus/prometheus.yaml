@@ -32,8 +32,6 @@ spec:
               releaseNamespace: true
               additional:
                 - kube-system
-                - nextcloud
-                - k8up
         alertmanager:
           ingress:
             enabled: true

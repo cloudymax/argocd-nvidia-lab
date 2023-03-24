@@ -13,44 +13,11 @@ spec:
     server: "https://kubernetes.default.svc"
     namespace: monitoring
   source:
-    repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: 43.1.0
-    chart: kube-prometheus-stack
-    helm:
-      skipCrds: true
-      values: |
-        prometheus:
-          ingress:
-            enabled: true
-            ingressClassName: nginx
-            hosts:
-              - prometheus.cloudydev.net
-          prometheusSpec:
-            serviceMonitorSelectorNilUsesHelmValues: false
-          prometheusOperator:
-            namespaces:
-              releaseNamespace: true
-              additional:
-                - kube-system
-        alertmanager:
-          ingress:
-            enabled: true
-            ingressClassName: nginx
-            hosts:
-              - alertmanager.cloudydev.net
-        grafana:
-          ingress:
-            enabled: true
-            ingressClassName: nginx
-            hosts:
-              - grafana.cloudydev.net
-        scrape_configs:
-        - job_name: ingress
-          honor_timestamps: true
-          scrape_interval: 1m
-          scrape_timeout: 1m
-          metrics_path: /metrics
-          scheme: http
+    repoURL: https://github.com/cloudymax/argocd-nvidia-lab.git
+    path: /prometheus/helm/
+    helm: 
+      valueFiles:
+        - values.yaml
       syncPolicy:
     automated:
       prune: true

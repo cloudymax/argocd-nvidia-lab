@@ -1,0 +1,86 @@
+---
+# installs whole kube-prometheus-stack which includes grafana and alert manager
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus-helm-chart
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  project: default
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: monitoring
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    targetRevision: 43.1.0
+    chart: kube-prometheus-stack
+    helm:
+      skipCrds: true
+      values: |
+        prometheus:
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            hosts:
+              - prometheus.cloudydev.net
+          prometheusSpec:
+            serviceMonitorSelectorNilUsesHelmValues: false
+          prometheusOperator:
+            namespaces:
+              releaseNamespace: true
+              additional:
+                - kube-system
+                - nextcloud
+                - k8up
+        alertmanager:
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            hosts:
+              - alertmanager.cloudydev.net
+        grafana:
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            hosts:
+              - grafana.cloudydev.net
+        scrape_configs:
+        - job_name: ingress
+          honor_timestamps: true
+          scrape_interval: 1m
+          scrape_timeout: 1m
+          metrics_path: /metrics
+          scheme: http
+      syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus-crd
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: default
+  destination:
+    name: in-cluster
+    namespace: monitoring
+  source:
+    repoURL: https://github.com/prometheus-community/helm-charts.git
+    path: charts/kube-prometheus-stack/crds/
+    targetRevision: kube-prometheus-stack-43.1.0
+    directory:
+      recurse: true
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - Replace=true
+    automated:
+      selfHeal: true
+      prune: true

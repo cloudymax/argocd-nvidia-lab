@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/cloudymax/argocd-nvidia-lab.git
-    path: /prometheus/
+    path: /prometheus
   destination:
     server: "https://kubernetes.default.svc"
     namespace: monitoring

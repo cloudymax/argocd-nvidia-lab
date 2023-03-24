@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/cloudymax/argocd-nvidia-lab.git
-    path: /prometheus/helm
+    path: /prometheus/helm/
     helm:
       valueFiles:
         - values.yaml

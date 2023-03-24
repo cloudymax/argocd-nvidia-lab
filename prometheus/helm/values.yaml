@@ -11,28 +11,28 @@ prometheus:
           - prometheus.cloudydev.net
   prometheusSpec:
     serviceMonitorSelectorNilUsesHelmValues: false
-    resources:
-      requests:
-        memory: 700Mi
-        cpu: 100m
-      limits:
-        memory: 2000Mi
-        cpu: 1000m
-    storageSpec:
-      volumeClaimTemplate:
-        spec:
-          storageClassName: local-path
-          accessModes:
-            - ReadWriteOnce
-          resources:
-            requests:
-              storage: 5Gi
-    retention: 7d
-    logLevel: debug
-    additionalScrapeConfigsSecret:
-      enabled: true
-      name: scrape-configs
-      key: scrape-configs.yaml
+    #resources:
+    #  requests:
+    #    memory: 700Mi
+    #    cpu: 100m
+    #  limits:
+    #    memory: 2000Mi
+    #    cpu: 1000m
+    #storageSpec:
+    #  volumeClaimTemplate:
+    #    spec:
+    #      storageClassName: local-path
+    #      accessModes:
+    #        - ReadWriteOnce
+    #      resources:
+    #        requests:
+    #          storage: 5Gi
+    #retention: 7d
+    #logLevel: debug
+    #additionalScrapeConfigsSecret:
+    #  enabled: true
+    #  name: scrape-configs
+    #  key: scrape-configs.yaml
   prometheusOperator:
     namespaces:
       releaseNamespace: true

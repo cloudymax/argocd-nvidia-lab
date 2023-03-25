@@ -5,6 +5,7 @@ prometheus:
     ingressClassName: nginx
     hosts:
       - prometheus.cloudydev.net
+    path: /
     tls:
       - secretName: letsencrypt-staging
         hosts:
@@ -53,16 +54,23 @@ alertmanager:
     ingressClassName: nginx
     hosts:
       - alertmanager.cloudydev.net
+    path: /
     tls:
       - secretName: letsencrypt-staging
         hosts:
           - alertmanager.cloudydev.net
 grafana:
+  adminPassword: prom-operator
   ingress:
     enabled: true
     ingressClassName: nginx
     hosts:
       - grafana.cloudydev.net
+    path: /
+    tls:
+      - secretName: letsencrypt-staging
+        hosts:
+          - grafana.cloudydev.net
 scrape_configs:
   - job_name: ingress
     honor_timestamps: true

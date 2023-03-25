@@ -29,6 +29,10 @@ prometheus:
               storage: 5Gi
     retention: 7d
     logLevel: debug
+    # Dont use additionalScrapeConfigs, its useless. You need to create your scrape configs as secrets.
+    # Follow the directions listed by the prometheus operator as it overrides anything in this block.
+    # you can find those docs here: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/additional-scrape-config.md
+    # additionalScrapeConfigs: []
     additionalScrapeConfigsSecret:
       enabled: true
       name: scrape-configs

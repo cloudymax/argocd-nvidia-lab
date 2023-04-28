@@ -2,19 +2,17 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: juicefs
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
 spec:
-  destination:
-    name: ''
-    namespace: juicefs
-    server: 'https://kubernetes.default.svc'
-  source:
-    path: ''
-    repoURL: 'https://juicedata.github.io/charts/'
-    targetRevision: 0.10.0
-    chart: juicefs-s3-gateway
-    helm:
-      valueFiles: []
   project: default
+  source:
+    repoURL: 'https://github.com/cloudymax/argocd-nvidia-lab.git'
+    path: 'juicefs'
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: juicefs
   syncPolicy:
     automated:
       prune: true

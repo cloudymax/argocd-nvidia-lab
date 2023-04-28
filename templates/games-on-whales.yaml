@@ -1,0 +1,29 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gamesonwhales
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+spec:
+  project: default
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: gamesonwhales
+  source:
+    repoURL: 'https://angelnu.github.io/helm-charts'
+    path: angelnu/games-on-whales
+    targetRevision: HEAD
+    helm:
+      skipCrds: true
+      values: |
+        loki:
+          isDefault: false
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - Replace=true
+    automated:
+      selfHeal: true
+      prune: true

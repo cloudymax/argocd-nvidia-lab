@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: juicefs
+spec:
+  destination:
+    name: ''
+    namespace: juicefs
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: ''
+    repoURL: 'https://juicedata.github.io/charts/'
+    targetRevision: 0.10.0
+    chart: juicefs-s3-gateway
+    helm:
+      valueFiles: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

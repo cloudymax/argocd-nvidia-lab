@@ -1,0 +1,23 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: juicefs-csi-driver
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  destination:
+    namespace: juicefs
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://juicedata.github.io/charts/'
+    targetRevision: 0.15.0
+    chart: juicefs-csi-driver
+    helm:
+      valueFiles: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

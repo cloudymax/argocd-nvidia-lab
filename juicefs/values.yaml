@@ -7,3 +7,11 @@ secret:
   bucket: "<bucket>"
 ingress:
   enabled: true
+  ingressClassName: nginx
+  hosts:
+    - s3.cloudydev.net
+  path: /
+  tls:
+    - secretName: letsencrypt-staging
+      hosts:
+        - s3.cloudydev.net

@@ -5,39 +5,33 @@ prometheus:
     ingressClassName: nginx
     hosts:
       - prometheus.cloudydev.net
-    path: /
     tls:
       - secretName: letsencrypt-staging
         hosts:
-          - prometheus.cloudydev.net
+        - prometheus.cloudydev.net
   prometheusSpec:
     serviceMonitorSelectorNilUsesHelmValues: false
     resources:
       requests:
         memory: 700Mi
         cpu: 100m
-      limits:
-        memory: 2000Mi
-        cpu: 1000m
+      #limits:
+      #  memory: 1000Mi
+      #  cpu: 750m
     storageSpec:
       volumeClaimTemplate:
         spec:
           storageClassName: local-path
-          accessModes:
-            - ReadWriteOnce
+          accessModes: ["ReadWriteOnce"]
           resources:
             requests:
-              storage: 5Gi
-    retention: 90d
+              storage: 10Gi
+    retention: 7d
     logLevel: debug
-    # Dont use additionalScrapeConfigs, its useless. You need to create your scrape configs as secrets.
-    # Follow the directions listed by the prometheus operator as it overrides anything in this block.
-    # you can find those docs here: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/additional-scrape-config.md
-    # additionalScrapeConfigs: []
     additionalScrapeConfigsSecret:
       enabled: true
-      name: scrape-configs
-      key: scrape-configs.yaml
+      name: additional-scrape-configs
+      key: prometheus-additional.yaml
   prometheusOperator:
     namespaces:
       releaseNamespace: true
@@ -45,7 +39,7 @@ prometheus:
         - kube-system
     admissionWebhooks:
       certManager:
-        enabled: yes
+        enabled: true
       patch:
         enabled: false
 alertmanager:
@@ -54,27 +48,25 @@ alertmanager:
     ingressClassName: nginx
     hosts:
       - alertmanager.cloudydev.net
-    path: /
     tls:
       - secretName: letsencrypt-staging
         hosts:
-          - alertmanager.cloudydev.net
+        - alertmanager.cloudydev.net
 grafana:
-  adminPassword: prom-operator
+  adminPassword: Rippling6-Rut-Dupe
   ingress:
     enabled: true
     ingressClassName: nginx
     hosts:
       - grafana.cloudydev.net
-    path: /
     tls:
       - secretName: letsencrypt-staging
         hosts:
-          - grafana.cloudydev.net
+        - grafana.cloudydev.net
 scrape_configs:
-  - job_name: ingress
-    honor_timestamps: true
-    scrape_interval: 1m
-    scrape_timeout: 1m
-    metrics_path: /metrics
-    scheme: http
+- job_name: ingress
+  honor_timestamps: true
+  scrape_interval: 1m
+  scrape_timeout: 1m
+  metrics_path: /metrics
+  scheme: http

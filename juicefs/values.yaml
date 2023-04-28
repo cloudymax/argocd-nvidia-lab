@@ -1,7 +1,7 @@
 secret:
-  name: "<name>"
+  name: "juicefs-s3-secret"
   metaurl: "<meta-url>"
-  storage: "<storage-type>"
+  storage: "s3"
   accessKey: "<access-key>"
   secretKey: "<secret-key>"
   bucket: "<bucket>"

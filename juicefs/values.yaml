@@ -1,0 +1,7 @@
+secret:
+  name: "<name>"
+  metaurl: "<meta-url>"
+  storage: "<storage-type>"
+  accessKey: "<access-key>"
+  secretKey: "<secret-key>"
+  bucket: "<bucket>"

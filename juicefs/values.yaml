@@ -5,3 +5,5 @@ secret:
   accessKey: "<access-key>"
   secretKey: "<secret-key>"
   bucket: "<bucket>"
+ingress:
+  enabled: true

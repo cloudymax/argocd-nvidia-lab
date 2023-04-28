@@ -28,7 +28,7 @@ prometheus:
           resources:
             requests:
               storage: 5Gi
-    retention: 7d
+    retention: 90d
     logLevel: debug
     # Dont use additionalScrapeConfigs, its useless. You need to create your scrape configs as secrets.
     # Follow the directions listed by the prometheus operator as it overrides anything in this block.

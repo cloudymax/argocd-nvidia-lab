@@ -1,0 +1,73 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: novnc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: remote-desktop
+  namespace: novnc
+spec:
+  selector:
+    matchLabels:
+      app: remote-desktop
+  template:
+    metadata:
+      labels:
+        app: remote-desktop
+    spec:
+      containers:
+      - name: remote-desktop
+        image: fredblgr/ubuntu-novnc:22.04
+        env:
+        - name: "HTTP_PASSWORD"
+          value: "demopass123"
+        - name: "RESOLUTION"
+          value: "1680x1050"
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "250Mi"
+            cpu: "250m"
+          limits:
+            memory: "500Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: remote-desktop-service
+  namespace: novnc
+spec:
+  selector:
+    app: remote-desktop
+  ports:
+    - protocol: TCP
+      port: 6080
+      targetPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: remote-desktop-ingress
+  namespace: novnc
+spec:
+  tls:
+    - hosts:
+      - novnc.cloudydev.net
+      secretName: letsencrypt-prod
+  ingressClassName: nginx
+  rules:
+  - host: novnc.cloudydev.net
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: remote-desktop-service
+            port:
+              number: 6080

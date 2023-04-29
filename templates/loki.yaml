@@ -1,29 +1,29 @@
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: loki
-  namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: "4"
-spec:
-  project: default
-  destination:
-    server: "https://kubernetes.default.svc"
-    namespace: monitoring
-  source:
-    repoURL: 'https://github.com/grafana/helm-charts'
-    path: charts/loki-stack
-    targetRevision: HEAD
-    helm:
-      skipCrds: true
-      values: |
-        loki:
-          isDefault: false
-  syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
-      - Replace=true
-    automated:
-      selfHeal: true
-      prune: true
+#---
+#apiVersion: argoproj.io/v1alpha1
+#kind: Application
+#metadata:
+#  name: loki
+#  namespace: argocd
+#  annotations:
+#    argocd.argoproj.io/sync-wave: "4"
+#spec:
+#  project: default
+#  destination:
+#    server: "https://kubernetes.default.svc"
+#    namespace: monitoring
+#  source:
+#    repoURL: 'https://github.com/grafana/helm-charts'
+#    path: charts/loki-stack
+#    targetRevision: HEAD
+#    helm:
+#      skipCrds: true
+#      values: |
+#        loki:
+#          isDefault: false
+#  syncPolicy:
+#    syncOptions:
+#      - CreateNamespace=true
+#      - Replace=true
+#    automated:
+#      selfHeal: true
+#      prune: true

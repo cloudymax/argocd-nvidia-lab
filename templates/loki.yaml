@@ -22,10 +22,15 @@ spec:
           isDefault: false
         promtail:
           enabled: true
-          config:
-            snippets:
-              common:
-                extraScrapeConfigs:
+          extraScrapeConfigs:
+            - job_name: system
+              static_configs:
+              - targets:
+                - localhost
+              labels:
+                job: varlogs
+                __path__: /var/log/*log
+                host: grafana
   syncPolicy:
     syncOptions:
       - CreateNamespace=true

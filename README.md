@@ -88,4 +88,6 @@ kubectl config set-context --current --namespace=argocd
 argocd app create app-of-apps --repo https://github.com/cloudymax/argocd-nvidia-lab.git \
     --path templates/ \
     --dest-server https://kubernetes.default.svc
+    
+argocd app sync app-of-apps
 ```

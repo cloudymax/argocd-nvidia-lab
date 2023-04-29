@@ -8,3 +8,7 @@ kind: KnativeServing
 metadata:
   name: knative-serving
   namespace: knative-serving
+spec:
+  config:
+    domain:
+      "knative.cloudydev.net": ""

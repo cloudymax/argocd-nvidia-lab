@@ -53,7 +53,7 @@ alertmanager:
         hosts:
         - alertmanager.cloudydev.net
 grafana:
-  adminPassword: Rippling6-Rut-Dupe
+  adminPassword: ChnageMe!
   ingress:
     enabled: true
     ingressClassName: nginx

@@ -41,10 +41,18 @@ kubectl apply -f additional-scrape-configs.yaml -n monitoring
 
 Update the Nginx configmap:
 
+```bash
+kubectl edit configmap -n ingress-nginx ingress-nginx-controller
+```
+
 ```yaml
-enable-owasp-modsecurity-crs: "true"
-enable-modsecurity: "true"
-load-balance: "ewma"
+apiVersion: v1
+data:
+  # ...
+  enable-owasp-modsecurity-crs: "true"
+  enable-modsecurity: "true"
+  load-balance: "ewma"
+  # ...
 ```
 
 ```bash
@@ -67,7 +75,7 @@ rm argocd-linux-amd64
 
 ```bash
 # Login to argocd via cli
-argocd login argocd.uneti-labs.com --username admin \
+argocd login argocd.cloudydev.net --username admin \
     --grpc-web \
     --password $(bw get password argocd.cloudydev.net)
 ```

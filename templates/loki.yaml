@@ -26,13 +26,6 @@ spec:
             snippets:
               common:
                 extraScrapeConfigs:
-                  - job_name: system
-                    static_configs:
-                    - targets:
-                      - localhost
-                      labels:
-                        job: varlogs
-                        __path__: /var/log/*.log
   syncPolicy:
     syncOptions:
       - CreateNamespace=true

@@ -6,7 +6,7 @@ metadata:
   name: app-of-apps
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   project: default
   destination:
@@ -16,7 +16,7 @@ spec:
     path: templates/
   syncPolicy:
     syncOptions:
-      - ApplyOutOfSyncOnly=true
+      - Replace=true
       - CreateNamespace=true
     automated:
       prune: true

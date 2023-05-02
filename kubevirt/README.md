@@ -2,7 +2,9 @@
 
 Following: https://kubevirt.io/quickstart_cloud/
 
-- You can manually download assets by checking the releases links: https://github.com/kubevirt/kubevirt/releases/
+## Installing the Operator and CRDs
+
+> You can manually download assets by checking the releases links: https://github.com/kubevirt/kubevirt/releases/
 
 - Installing the cli from source
 
@@ -28,3 +30,46 @@ Following: https://kubevirt.io/quickstart_cloud/
     --type=merge \
     --patch '{"spec":{"configuration":{"developerConfiguration":{"useEmulation":true}}}}'
   ```
+
+## Example VM
+
+```bash
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: testvm
+spec:
+  running: false
+  template:
+    metadata:
+      labels:
+        kubevirt.io/size: small
+        kubevirt.io/domain: testvm
+    spec:
+      domain:
+        devices:
+          disks:
+            - name: containerdisk
+              disk:
+                bus: virtio
+            - name: cloudinitdisk
+              disk:
+                bus: virtio
+          interfaces:
+          - name: default
+            masquerade: {}
+        resources:
+          requests:
+            memory: 64M
+      networks:
+      - name: default
+        pod: {}
+      volumes:
+        - name: containerdisk
+          containerDisk:
+            image: quay.io/kubevirt/cirros-container-disk-demo
+        - name: cloudinitdisk
+          cloudInitNoCloud:
+            userDataBase64: SGkuXG4=
+
+```

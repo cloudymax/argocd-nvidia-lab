@@ -10,7 +10,10 @@ spec:
   certificateRotateStrategy: {}
   configuration:
     developerConfiguration:
-      featureGates: []
+      featureGates:
+        - clientPassthrough
+        - SnapshotGate
+        - CPUNodeDiscoveryGate
   customizeComponents: {}
   imagePullPolicy: IfNotPresent
   workloadUpdateStrategy: {}

@@ -2,6 +2,8 @@
 
 Following: https://kubevirt.io/quickstart_cloud/
 
+- You can manually download assets by checking the releases links: https://github.com/kubevirt/kubevirt/releases/
+
 - Installing the cli from source
 
   ```bash

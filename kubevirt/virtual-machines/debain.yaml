@@ -43,7 +43,7 @@ spec:
           isolateEmulatorThread: false
           sockets: 1
           cores: 2
-          threads: 1
+          threads: 2
         firmware:
           # this sets the bootloader type
           bootloader:

@@ -1,8 +1,13 @@
 # Kubevirt
 
-Following: https://kubevirt.io/quickstart_cloud/
+Kubevirt wraps QEMU and provides a Kubernetes-Native way to deploy virtual machines as code.
+
+- Virtual Machines are defined as yaml in the `virtual-machines` directory
+- Disk images are stores as PVCs and are defined in the `disks` directory
 
 ## Installing the Operator and CRDs
+
+Following: https://kubevirt.io/quickstart_cloud/
 
 > You can manually download assets by checking the releases links: https://github.com/kubevirt/kubevirt/releases/
 

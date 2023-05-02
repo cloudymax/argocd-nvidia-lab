@@ -101,3 +101,7 @@ argocd app create app-of-apps --repo https://github.com/cloudymax/argocd-nvidia-
     
 argocd app sync app-of-apps
 ```
+
+## Kubevirt Dashboard
+
+- https://grafana.com/grafana/dashboards/11748-kubevirt/

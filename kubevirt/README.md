@@ -46,3 +46,8 @@ Following: https://kubevirt.io/quickstart_cloud/
 ## Using the CDI to manage images
 
 - https://kubevirt.io/2018/containerized-data-importer.html
+
+## Metrics
+
+- https://kubevirt.io/user-guide/operations/component_monitoring/
+- use the `prometheus-helm-chart-kube-prometheus` service account created by kube-prometheus-stack

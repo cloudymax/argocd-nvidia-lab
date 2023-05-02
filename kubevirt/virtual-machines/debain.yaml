@@ -1,16 +1,31 @@
 ---
+apiVersion: cdi.kubevirt.io/v1alpha1
+kind: DataVolume
+metadata:
+  name: debian-rom
+  namespace: kubevirt
+spec:
+  source:
+    pvc:
+      namespace: kubevirt
+      name: debian
+  pvc:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 3Gi
+---
 apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
   generation: 1
   labels:
     kubevirt.io/os: linux
-    kubevirt.io/vm: debian
   namespace: kubevirt
   name: debian
 spec:
   runStrategy: "RerunOnFailure"
-  running: true
   template:
     metadata:
       creationTimestamp: null
@@ -19,14 +34,16 @@ spec:
     spec:
       domain:
         features:
-          - kvm
-          - acpi
+          kvm: {}
+          acpi: {}
+          smm:
+            enabled: true
         cpu:
-          dedicatedCpuPlacement: true
-          isolateEmulatorThread: true
+          dedicatedCpuPlacement: false
+          isolateEmulatorThread: false
           sockets: 1
           cores: 2
-          threads: 2
+          threads: 1
         firmware:
           # this sets the bootloader type
           bootloader:
@@ -40,34 +57,22 @@ spec:
           - cdrom:
               bus: sata
               readonly: true
-            name: cloudinitdisk
+            name: cloudinitvolume
         machine:
           type: q35
         resources:
           limits:
             memory: 2Gi
       volumes:
-      - dataVolume:
-          name: debian-vd
-        name: disk0
-      - cloudInitNoCloud:
-          userData: |
-            #cloud-config
-            hostname: debian
-            ssh_pwauth: True
-            disable_root: false
-            ssh_authorized_keys:
-            - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDN8B/72VRHKul81wUDxmoP7YQzsdq4NFnavPImhETfACKpu19IlLf3A2t8S+5NtKT416TY+aBupOdFcHApwFCML4ZKBvNVSDBxHUn60JCRegdDIYXStXC/PazI0/BrH7NDu9jofRYIMlrZZ7iGy+6xPyPD4lNOYHTLahMglu8RH2cwTqrfWnD7tYMm9m9HBVUF3+R1tS1v6KDGlj1Hda7oQKhwEYxc6KQAUXcwup+biA39XdTMEU+dfH/KBRn5EdaWDkeEbxrUGhpKj9H+8/TgUq1WKT8ZC42TGURviw+xmVMhJSoJ6N+GoK/SOS58F7qeq5SHQyktrEjxWVP7rei5idsQ1NIQkYvpcKELXpDuIJIoisdjMNGDdr4i2nWb3493Tmpm+iFSY6Le2o8SQClCE8+9ELk7jToZOLjJT+tT4dq2gc3bryp2A/4NT4U5+mTDkKhnlo53tcZ6tDvJxI6JxU0J5T521fXamTGurY7L8mK2RNE683aZwx66NcDKoQM= friend@vps
-    dataVolumeTemplates:
-    - metadata:
-        name: debian-dv
-      spec:
-        pvc:
-          accessModes:
-          - ReadWriteOnce
-          resources:
-            requests:
-              storage: 2Gi
-        source:
-          http:
-            url: https://cloud.debian.org/images/cloud/bookworm/daily/latest/debian-12-generic-amd64-daily.qcow2
+        - name: disk0
+          persistentVolumeClaim:
+            claimName: debian-rom
+        - name: cloudinitvolume
+          cloudInitNoCloud:
+            userData: |
+              #cloud-config
+              hostname: debian
+              ssh_pwauth: True
+              disable_root: false
+              ssh_authorized_keys:
+              - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDN8B/72VRHKul81wUDxmoP7YQzsdq4NFnavPImhETfACKpu19IlLf3A2t8S+5NtKT416TY+aBupOdFcHApwFCML4ZKBvNVSDBxHUn60JCRegdDIYXStXC/PazI0/BrH7NDu9jofRYIMlrZZ7iGy+6xPyPD4lNOYHTLahMglu8RH2cwTqrfWnD7tYMm9m9HBVUF3+R1tS1v6KDGlj1Hda7oQKhwEYxc6KQAUXcwup+biA39XdTMEU+dfH/KBRn5EdaWDkeEbxrUGhpKj9H+8/TgUq1WKT8ZC42TGURviw+xmVMhJSoJ6N+GoK/SOS58F7qeq5SHQyktrEjxWVP7rei5idsQ1NIQkYvpcKELXpDuIJIoisdjMNGDdr4i2nWb3493Tmpm+iFSY6Le2o8SQClCE8+9ELk7jToZOLjJT+tT4dq2gc3bryp2A/4NT4U5+mTDkKhnlo53tcZ6tDvJxI6JxU0J5T521fXamTGurY7L8mK2RNE683aZwx66NcDKoQM= friend@vps

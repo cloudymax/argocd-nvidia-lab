@@ -1,0 +1,23 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubevirt-vms
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+spec:
+  project: default
+  destination:
+    name: in-cluster
+    namespace: kubevirt
+  source:
+    repoURL: https://github.com/cloudymax/argocd-nvidia-lab.git
+    path: kubevirt/virtual-machines/
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - Replace=true
+    automated:
+      selfHeal: true
+      prune: true

@@ -6,8 +6,7 @@ metadata:
   namespace: kubevirt
 spec:
   monitorNamespace: monitoring
-  monitorAccount: default
-  serviceMonitorNamespace: monitoring
+  monitorAccount: prometheus-k8s
   certificateRotateStrategy: {}
   configuration:
     developerConfiguration:

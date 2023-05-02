@@ -13,13 +13,13 @@ Following: https://kubevirt.io/quickstart_cloud/
   sudo install virtctl /usr/local/bin
   ```
 
-Install as a krew plugin
+- Install as a krew plugin
 
   ```bash
   kubectl krew install virt
   ```
 
-Enable nested virtualization if desired
+- Enable nested virtualization if desired
 
   ```bash
   kubectl -n kubevirt patch kubevirt kubevirt \

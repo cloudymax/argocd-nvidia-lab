@@ -1,22 +1,50 @@
+---
+apiVersion: cdi.kubevirt.io/v1alpha1
+kind: DataVolume
+metadata:
+  name: debian-rom
+  namespace: kubevirt
+spec:
+  source:
+    pvc:
+      namespace: kubevirt
+      name: debain
+  pvc:
+    accessModes:
+      - ReadOnlyMany
+    resources:
+      requests:
+        storage: 3Gi
+---
 apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
   generation: 1
   labels:
     kubevirt.io/os: linux
-  name: vm1
+  namespace: kubevirt
+  name: debian
 spec:
+  runStrategy: "RerunOnFailure"
   running: true
   template:
     metadata:
       creationTimestamp: null
       labels:
-        kubevirt.io/domain: vm1
+        kubevirt.io/domain: debain
     spec:
       domain:
+        features:
+          - kvm
+          - acpi
         cpu:
           cores: 2
+        firmware:
+          # this sets the bootloader type
+          bootloader:
+            efi: {}
         devices:
+          autoattachGraphicsDevice: true
           disks:
           - disk:
               bus: virtio

@@ -1,7 +1,6 @@
 apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
-  creationTimestamp: 2018-07-04T15:03:08Z
   generation: 1
   labels:
     kubevirt.io/os: linux

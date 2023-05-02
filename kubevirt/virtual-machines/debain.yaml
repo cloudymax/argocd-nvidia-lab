@@ -40,6 +40,9 @@ spec:
         cpu:
           dedicatedCpuPlacement: true
           isolateEmulatorThread: true
+          sockets: 1
+          cores: 2
+          threads: 2
         firmware:
           # this sets the bootloader type
           bootloader:
@@ -58,7 +61,6 @@ spec:
           type: q35
         resources:
           limits:
-            cpu: 2
             memory: 2Gi
       volumes:
       - name: disk0

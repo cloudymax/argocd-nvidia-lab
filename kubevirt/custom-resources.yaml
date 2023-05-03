@@ -11,9 +11,18 @@ spec:
   configuration:
     developerConfiguration:
       featureGates:
+        - CPUManager
+        - GPU
+        - HostDevices
+        - VMExport
+        - HotplugVolumes
+        - HostDisk
+        - Macvtap
+        - Passt
+        - HotplugNICs
         - clientPassthrough
-        - SnapshotGate
-        - CPUNodeDiscoveryGate
+        - Snapshot
+        - CPUNodeDiscovery
   customizeComponents: {}
   imagePullPolicy: IfNotPresent
   workloadUpdateStrategy: {}

@@ -7,9 +7,10 @@ An ArgoCD [app-of-apps] to deploy a Nvidia-based HPC cluster on [smol-k8s-lab].
 1. Kube-prometheus-stack
 2. Loki-stack
 3. Nvidia GPU Operator
-4. Extra Scrape targets (wip)
+4. Extra Scrape targets
 5. Dashboards (wip)
 6. Production ClusterIssuer (not set as default in apps yet)
+7. kubevirt
 
 ## Extras
 
@@ -37,16 +38,10 @@ Add this yaml for a prometheus scrape configs as a secret
   static_configs:
   - targets: ["postgres-postgresql-metrics.default.svc.cluster.local:9187"]
 ```
-```
-
 ```bash
-kubectl create ns monitoring
 kubectl create secret generic additional-scrape-configs --from-file=prometheus-additional.yaml \
     --dry-run=client -oyaml > additional-scrape-configs.yaml
-
-kubectl apply -f additional-scrape-configs.yaml -n monitoring
 ```
-
 ## NGINX MOD Security + Metrics
 
 Update the Nginx configmap:

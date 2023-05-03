@@ -42,7 +42,7 @@ metadata:
   name: nginx-hello-ingress
   namespace: nginx-hello
   annotations:
-    cert-manager.io/issuer: "letsencrypt-staging"
+    cert-manager.io/issuer: "letsencrypt-prod"
 spec:
   tls:
     - hosts:

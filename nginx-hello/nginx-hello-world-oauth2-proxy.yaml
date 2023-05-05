@@ -1,9 +1,7 @@
----
 apiVersion: v1
 kind: Namespace
 metadata:
   name: nginx-hello
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -20,10 +18,10 @@ spec:
         app: nginx-hello
     spec:
       containers:
-        - name: nginx-hello
-          image: nginx
-          ports:
-            - containerPort: 80
+      - name: nginx-hello
+        image: nginx
+        ports:
+        - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -44,18 +42,18 @@ metadata:
   name: nginx-hello-external-auth
   namespace: kube-system
   annotations:
-    nginx.ingress.kubernetes.io/auth-url: https://$host/oauth2/auth
-    nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2/start?rd=$escaped_request_uri
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
 spec:
   ingressClassName: nginx
   rules:
-    - host: nginx-hello.cloudydev.net
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: nginx-hello-service
-                port:
-                  number: 5000
+  - host: nginx-hello.cloudydev.net
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-hello-service
+            port:
+              number: 5000

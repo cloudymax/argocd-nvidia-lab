@@ -22,8 +22,8 @@ spec:
           cookieName: secretcookie4u
         ingress:
           enabled: true
-          path: /
-          pathType: ImplementationSpecific
+          path: /oauth2
+          pathType: Prefix
           hosts: 
             - nginx-hello.cloudydev.net
           labels: {}

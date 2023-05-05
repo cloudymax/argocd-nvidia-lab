@@ -1,43 +1,36 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: oauth2-proxy
-spec:
-  destination:
-    name: ''
-    namespace: hello-nginx
-    server: 'https://kubernetes.default.svc'
-  source:
-    path: ''
-    repoURL: 'https://oauth2-proxy.github.io/manifests/'
-    targetRevision: 6.12.0
-    chart: oauth2-proxy
-    helm:
-      skipCrds: true
-      values: |
-        config:
-          clientID: 
-          clientSecret: 
-          cookieSecret: 
-          cookieName: secretcookie4u
-        ingress:
-          enabled: true
-          path: /oauth2
-          pathType: Prefix
-          hosts: 
+project: default
+source:
+  repoURL: 'https://oauth2-proxy.github.io/manifests/'
+  targetRevision: 6.12.0
+  helm:
+    values: |
+      config:
+        clientID: 
+        clientSecret: 
+        cookieSecret: 
+        cookieName: secretcookie4u
+      ingress:
+        enabled: true
+        path: /
+        pathType: ImplementationSpecific
+        hosts: 
+          - nginx-hello.cloudydev.net
+        labels: {}
+        annotations:
+          kubernetes.io/ingress.class: nginx
+          kubernetes.io/tls-acme: "true"
+        tls:
+        - secretName: "letsencrypt-prod"
+          hosts:
             - nginx-hello.cloudydev.net
-          labels: {}
-          annotations:
-            kubernetes.io/ingress.class: nginx
-            kubernetes.io/tls-acme: "true"
-          tls:
-          - secretName: "letsencrypt-prod"
-            hosts:
-              - nginx-hello.cloudydev.net
-  project: default
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+    skipCrds: true
+  chart: oauth2-proxy
+destination:
+  server: 'https://kubernetes.default.svc'
+  namespace: hello-nginx
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true
+  syncOptions:
+    - CreateNamespace=true

@@ -76,7 +76,7 @@ spec:
             name: oauth2-proxy
             port:
               number: 4180
-  tls:
+tls:
   - hosts:
     - nginx-hello.cloudydev.net
     secretName: "letsencrypt-prod"

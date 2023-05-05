@@ -42,14 +42,10 @@ metadata:
   name: nginx-hello-ingress
   namespace: nginx-hello
   annotations:
-    kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
 spec:
-  tls:
-    - hosts:
-      - nginx-hello.cloudydev.net
-      secretName: "letsencrypt-prod"
+  ingressClassName: nginx
   rules:
   - host: nginx-hello.cloudydev.net
     http:

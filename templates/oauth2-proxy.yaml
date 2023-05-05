@@ -21,11 +21,11 @@ source:
           - nginx-hello.cloudydev.net
         labels: {}
         annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-prod"
+          cert-manager.io/cluster-issuer: "letsencrypt-staging"
           kubernetes.io/ingress.class: nginx
           kubernetes.io/tls-acme: "true"
         tls:
-        - secretName: "letsencrypt-prod"
+        - secretName: "letsencrypt-staging"
           hosts:
             - nginx-hello.cloudydev.net
     skipCrds: true

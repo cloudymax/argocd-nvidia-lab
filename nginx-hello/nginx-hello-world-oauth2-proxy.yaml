@@ -1,7 +1,9 @@
+---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: nginx-hello
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -18,10 +20,11 @@ spec:
         app: nginx-hello
     spec:
       containers:
-      - name: nginx-hello
-        image: nginx
-        ports:
-        - containerPort: 80
+        - name: nginx-hello
+          image: nginx
+          ports:
+            - containerPort: 80
+
 ---
 apiVersion: v1
 kind: Service
@@ -35,6 +38,7 @@ spec:
     - protocol: TCP
       port: 5000
       targetPort: 80
+
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -42,21 +46,22 @@ metadata:
   name: nginx-hello-external-auth
   namespace: kube-system
   annotations:
-    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
-    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+    nginx.ingress.kubernetes.io/auth-url: https://$host/oauth2/auth
+    nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2/start?rd=$escaped_request_uri
 spec:
   ingressClassName: nginx
   rules:
-  - host: nginx-hello.cloudydev.net
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: nginx-hello-service
-            port:
-              number: 5000
+    - host: nginx-hello.cloudydev.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx-hello-service
+                port:
+                  number: 5000
+
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -66,17 +71,17 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: nginx-hello.cloudydev.net
-    http:
-      paths:
-      - path: /oauth2
-        pathType: Prefix
-        backend:
-          service:
-            name: oauth2-proxy
-            port:
-              number: 4180
+    - host: nginx-hello.cloudydev.net
+      http:
+        paths:
+          - path: /oauth2
+            pathType: Prefix
+            backend:
+              service:
+                name: oauth2-proxy
+                port:
+                  number: 4180
 tls:
   - hosts:
-    - nginx-hello.cloudydev.net
-    secretName: "letsencrypt-prod"
+      - nginx-hello.cloudydev.net
+    secretName: letsencrypt-prod

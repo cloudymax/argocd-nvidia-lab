@@ -9,14 +9,19 @@ source:
         clientSecret: 
         cookieSecret: 
         cookieName: secretcookie4u
+      configFile: |-
+        email_domains = [ "*" ]
+        upstreams = [ "file:///dev/null" ]
+        redirect-url = [ "https://nginx-hello.cloudydev.net/oauth2/callback" ]
       ingress:
         enabled: true
         path: /
-        pathType: ImplementationSpecific
+        pathType: Prefix
         hosts: 
           - nginx-hello.cloudydev.net
         labels: {}
         annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-prod"
           kubernetes.io/ingress.class: nginx
           kubernetes.io/tls-acme: "true"
         tls:
@@ -27,7 +32,7 @@ source:
   chart: oauth2-proxy
 destination:
   server: 'https://kubernetes.default.svc'
-  namespace: hello-nginx
+  namespace: kube-system
 syncPolicy:
   automated:
     prune: true

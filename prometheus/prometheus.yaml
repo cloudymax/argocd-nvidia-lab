@@ -70,13 +70,13 @@ spec:
             annotations: {}
             ingressClassName: nginx
             hosts:
-              - alertmanager.cloudydev.net
+              - alert.cloudydev.net
             paths: 
               - /
             tls:
               - secretName: letsencrypt-staging
                 hosts:
-                - alertmanager.cloudydev.net
+                - alert.cloudydev.net
         grafana:
           adminPassword: ChangeMe!
           additionalDataSources: []

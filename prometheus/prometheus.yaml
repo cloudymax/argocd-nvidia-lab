@@ -68,6 +68,8 @@ spec:
             ingressClassName: nginx
             hosts:
               - alertmanager.cloudydev.net
+            paths: 
+              - /
             tls:
               - secretName: letsencrypt-staging
                 hosts:

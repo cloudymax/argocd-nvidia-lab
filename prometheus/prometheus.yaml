@@ -31,10 +31,10 @@ spec:
             paths: 
               - /
               pathType: Prefix
-            #tls:
-            #  - secretName: letsencrypt-staging
-            #    hosts:
-            #    - prometheus.cloudydev.net
+            tls:
+              - secretName: letsencrypt-staging
+                hosts:
+                - prometheus.cloudydev.net
           prometheusSpec:
             serviceMonitorSelectorNilUsesHelmValues: false
             resources:
@@ -82,10 +82,10 @@ spec:
             paths: 
               - /
               pathType: Prefix
-            #tls:
-            #  - secretName: letsencrypt-staging
-            #    hosts:
-            #    - alert.cloudydev.net
+            tls:
+              - secretName: letsencrypt-staging
+                hosts:
+                - alert.cloudydev.net
         grafana:
           adminPassword: ChangeMe!
           additionalDataSources: []

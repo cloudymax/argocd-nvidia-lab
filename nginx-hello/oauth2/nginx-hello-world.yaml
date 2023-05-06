@@ -42,10 +42,10 @@ metadata:
     nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
     # These next four lines are only necessary if you're using cert-manager to generate TLS certificates
-    ingress.kubernetes.io/force-ssl-redirect: "true"
-    ingress.kubernetes.io/proxy-body-size: "1024m"
-    nginx.ingress.kubernetes.io/proxy-body-size: "1024m"
-    cert-manager.io/issuer: "letsencrypt-staging"
+    #ingress.kubernetes.io/force-ssl-redirect: "true"
+    #ingress.kubernetes.io/proxy-body-size: "1024m"
+    #nginx.ingress.kubernetes.io/proxy-body-size: "1024m"
+    #cert-manager.io/issuer: "letsencrypt-staging"
 spec:
   ingressClassName: nginx
   rules:

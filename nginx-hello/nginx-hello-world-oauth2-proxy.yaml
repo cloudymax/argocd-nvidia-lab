@@ -1,7 +1,3 @@
-kind: Namespace
-metadata:
-  name: nginx-hello
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -39,10 +35,17 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nginx-hello-external-auth
-  namespace: kube-system
+  namespace: nginx-hello
   annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+    # These next four lines are only necessary if you're using cert-manager to generate TLS certificates
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    ingress.kubernetes.io/proxy-body-size: "1024m"
+    nginx.ingress.kubernetes.io/proxy-body-size: "1024m"
+    cert-manager.io/issuer: "letsencrypt-staging"
 spec:
   ingressClassName: nginx
   rules:
@@ -56,22 +59,3 @@ spec:
             name: nginx-hello-service
             port:
               number: 5000
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: oauth2-proxy
-  namespace: kube-system
-spec:
-  ingressClassName: nginx
-  rules:
-  - host: nginx-hello.cloudydev.net
-    http:
-      paths:
-      - path: /oauth2
-        pathType: Prefix
-        backend:
-          service:
-            name: oauth2-proxy
-            port:
-              number: 4180

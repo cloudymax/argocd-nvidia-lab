@@ -28,10 +28,10 @@ spec:
             ingressClassName: nginx
             hosts:
               - prometheus.cloudydev.net
-            tls:
-              - secretName: letsencrypt-staging
-                hosts:
-                - prometheus.cloudydev.net
+            #tls:
+            #  - secretName: letsencrypt-staging
+            #    hosts:
+            #    - prometheus.cloudydev.net
           prometheusSpec:
             serviceMonitorSelectorNilUsesHelmValues: false
             resources:

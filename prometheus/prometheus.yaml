@@ -28,13 +28,13 @@ spec:
             ingressClassName: nginx
             hosts:
               - prometheus.cloudydev.net
-            paths: 
-              - /
-              pathType: Prefix
-            tls:
-              - secretName: letsencrypt-staging
-                hosts:
-                - prometheus.cloudydev.net
+            #paths: 
+            #  - /
+            #  pathType: Prefix
+            #tls:
+            #  - secretName: letsencrypt-staging
+            #    hosts:
+            #    - prometheus.cloudydev.net
           prometheusSpec:
             serviceMonitorSelectorNilUsesHelmValues: false
             resources:
@@ -79,13 +79,13 @@ spec:
             ingressClassName: nginx
             hosts:
               - alert.cloudydev.net
-            paths: 
-              - /
-              pathType: Prefix
-            tls:
-              - secretName: letsencrypt-staging
-                hosts:
-                - alert.cloudydev.net
+            #paths: 
+            #  - /
+            #  pathType: Prefix
+            #tls:
+            #  - secretName: letsencrypt-staging
+            #    hosts:
+            #    - alert.cloudydev.net
         grafana:
           adminPassword: ChangeMe!
           additionalDataSources: []

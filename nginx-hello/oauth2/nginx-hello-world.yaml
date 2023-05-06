@@ -47,7 +47,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: "1024m"
     cert-manager.io/issuer: "letsencrypt-staging"
 spec:
-  ingressClassName: nginx
+ # ingressClassName: nginx
   rules:
   - host: nginx-hello.cloudydev.net
     http:

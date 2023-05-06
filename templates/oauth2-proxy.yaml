@@ -20,14 +20,14 @@ source:
           - nginx-hello.cloudydev.net
         labels: {}
         annotations:
-          nginx.ingress.kubernetes.io/rewrite-target: /oauth2
-          cert-manager.io/cluster-issuer: "letsencrypt-staging"
-          kubernetes.io/tls-acme: "true"
+          #nginx.ingress.kubernetes.io/rewrite-target: /oauth2
+          #cert-manager.io/cluster-issuer: "letsencrypt-staging"
+          #kubernetes.io/tls-acme: "true"
           kubernetes.io/ingress.class: "nginx"
           # These next three lines are only necessary if you're using cert-manager to generate TLS certificates
-          ingress.kubernetes.io/force-ssl-redirect: "true"
-          ingress.kubernetes.io/proxy-body-size: "1024m"
-          nginx.ingress.kubernetes.io/proxy-body-size: "1024m"
+          #ingress.kubernetes.io/force-ssl-redirect: "true"
+          #ingress.kubernetes.io/proxy-body-size: "1024m"
+          #nginx.ingress.kubernetes.io/proxy-body-size: "1024m"
         tls:
         - secretName: "letsencrypt-staging"
           hosts:

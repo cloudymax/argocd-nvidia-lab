@@ -12,12 +12,16 @@ source:
       configFile: |-
         email_domains = [ "*" ]
         upstreams = [ "file:///dev/null" ]
-        redirect-url = [ "https://nginx-hello.cloudydev.net/oauth2/callback" ]
+        redirect-url = [ "https://nginx-hello.cloudydev.net/oauth2/callback", 
+          "https://alert.cloudydev.net/oauth2/callback",
+          "https://prometheus.cloudydev.net/oauth2/callback" ]
       ingress:
         enabled: true
         path: /oauth2
         hosts: 
           - nginx-hello.cloudydev.net
+          - prometheus.cloudydev.net
+          - alert.cloudydev.net
         labels: {}
         annotations:
           #nginx.ingress.kubernetes.io/rewrite-target: /oauth2
@@ -32,6 +36,8 @@ source:
         - secretName: "letsencrypt-staging"
           hosts:
             - nginx-hello.cloudydev.net
+            - prometheus.cloudydev.net
+            - alert.cloudydev.net
     skipCrds: true
   chart: oauth2-proxy
 destination:

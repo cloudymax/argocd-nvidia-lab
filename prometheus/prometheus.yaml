@@ -33,7 +33,7 @@ spec:
               - prometheus.cloudydev.net
             paths: 
               - /
-              #pathType: Prefix
+              pathType: Prefix
             tls:
               - secretName: letsencrypt-staging
                 hosts:

@@ -31,8 +31,8 @@ spec:
             ingressClassName: nginx
             hosts:
               - prometheus.cloudydev.net
-            #paths: 
-              #- /
+            paths: 
+              - /
               #pathType: Prefix
             tls:
               - secretName: letsencrypt-staging

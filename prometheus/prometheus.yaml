@@ -63,11 +63,16 @@ spec:
               patch:
                 enabled: false
         alertmanager:
+          enabled: true
+          annotations: {}
           ingress:
             enabled: true
+            annotations: {}
             ingressClassName: nginx
             hosts:
               - alertmanager.cloudydev.net
+            paths: 
+              - /
             tls:
               - secretName: letsencrypt-staging
                 hosts:

@@ -13,7 +13,7 @@ spec:
     path: nginx-hello/
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: monitoring
+    namespace: nginx-hello
   syncPolicy:
     syncOptions:
       - CreateNamespace=true

@@ -26,7 +26,7 @@ spec:
             hosts:
               - prometheus.cloudydev.net
             tls:
-              - secretName: letsencrypt-prod
+              - secretName: letsencrypt-staging
                 hosts:
                 - prometheus.cloudydev.net
           prometheusSpec:
@@ -69,7 +69,7 @@ spec:
             hosts:
               - alertmanager.cloudydev.net
             tls:
-              - secretName: letsencrypt-prod
+              - secretName: letsencrypt-staging
                 hosts:
                 - alertmanager.cloudydev.net
         grafana:
@@ -81,7 +81,7 @@ spec:
             hosts:
               - grafana.cloudydev.net
             tls:
-              - secretName: letsencrypt-prod
+              - secretName: letsencrypt-staging
                 hosts:
                 - grafana.cloudydev.net
         scrape_configs:

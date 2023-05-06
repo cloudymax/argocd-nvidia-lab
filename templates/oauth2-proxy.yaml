@@ -15,7 +15,7 @@ source:
         redirect-url = [ "https://nginx-hello.cloudydev.net/oauth2/callback" ]
       ingress:
         enabled: true
-        path: /
+        path: /oauth2
         hosts: 
           - nginx-hello.cloudydev.net
         labels: {}

@@ -107,7 +107,8 @@ spec:
               auto_assign_org: true
               auto_assign_org_role: Viewer
               viewers_can_edit: true
-          adminPassword: ChangeMe!
+          admin_user: emax@cloudydev.net
+          admin_email: emax@cloudydev.net
           additionalDataSources: []
           ingress:
             enabled: true

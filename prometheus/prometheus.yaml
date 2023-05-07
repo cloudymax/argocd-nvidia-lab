@@ -96,6 +96,7 @@ spec:
           grafana.ini:
             auth:
               disable_login_form: false
+              signout_redirect_url: "https://grafana.cloudydev.net/oauth2/sign_out"
             auth.proxy:
               enabled: true
               auto_login: false

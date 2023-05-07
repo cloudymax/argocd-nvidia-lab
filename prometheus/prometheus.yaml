@@ -102,7 +102,7 @@ spec:
               header_name: X-Vouch-User
               header_property: username
               auto_sign_up: true
-            #users:
+            users:
               allow_sign_up: false
               auto_assign_org: true
               auto_assign_org_role: Admin

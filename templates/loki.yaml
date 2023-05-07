@@ -45,7 +45,6 @@ spec:
               labels:
                 job: varlogs
                 __path__: /var/log/*log
-                host: grafana
   syncPolicy:
     syncOptions:
       - CreateNamespace=true

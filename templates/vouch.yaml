@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vouch
+spec:
+  destination:
+    namespace: vouch
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://vouch.github.io/helm-charts/'
+    targetRevision: 3.1.0
+    chart: vouch
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false

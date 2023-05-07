@@ -98,6 +98,7 @@ spec:
               disable_login_form: false
             auth.proxy:
               enabled: true
+              auto_login: false
               header_name: X-Vouch-User
               header_property: username
               auto_sign_up: true

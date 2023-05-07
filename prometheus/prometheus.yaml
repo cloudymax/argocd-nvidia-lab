@@ -102,15 +102,24 @@ spec:
               disable_gravatar: true
             dashboards:
               min_refresh_interval: 1s
-            auth.google:
+            #auth.google:
+            #  enabled: true
+            #  client_id: 1006740834249-l6kigouj8ujr65f3ac02hv99mrsm42pi.apps.googleusercontent.com
+            #  client_secret: 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
+            #  scopes: https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email
+            #  auth_url: https://accounts.google.com/o/oauth2/auth
+            #  token_url: https://accounts.google.com/o/oauth2/token
+            #  allowed_domains: cloudydev.net
+            #  allow_sign_up: true
+            auth.proxy
               enabled: true
-              client_id: 1006740834249-l6kigouj8ujr65f3ac02hv99mrsm42pi.apps.googleusercontent.com
-              client_secret: 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
-              scopes: https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email
-              auth_url: https://accounts.google.com/o/oauth2/auth
-              token_url: https://accounts.google.com/o/oauth2/token
-              allowed_domains: cloudydev.net
-              allow_sign_up: true
+              header_name: X-WEBAUTH-USER
+              header_property: username
+              auto_sign_up: true
+              sync_ttl: 60
+              headers:
+                headers_encoded: false
+              enable_login_token = false
           adminPassword: ChangeMe!
           additionalDataSources: []
           ingress:

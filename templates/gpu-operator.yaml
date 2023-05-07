@@ -1,3 +1,9 @@
+# The NVIDIA GPU Operator uses the operator framework within Kubernetes to automate the 
+# management of all NVIDIA software components needed to provision GPU. 
+# These components include the NVIDIA drivers (to enable CUDA), Kubernetes 
+# device plugin for GPUs, the NVIDIA Container Runtime, automatic node labelling, 
+# DCGM based monitoring and others.
+# https://github.com/NVIDIA/gpu-operator
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application

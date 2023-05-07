@@ -22,9 +22,14 @@ spec:
         prometheus:
           ingress:
             annotations:
-              nginx.ingress.kubernetes.io/rewrite-target: /
-              nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
-              nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+              nginx.ingress.kubernetes.io/auth-signin: "https://vouch.yourdomain.com/login?url=$scheme://$http_host$request_uri&vouch-failcount=$auth_resp_failcount&X-Vouch-Token=$auth_resp_jwt&error=$auth_resp_err"
+              nginx.ingress.kubernetes.io/auth-url: https://vouch.yourdomain.com/validate
+              nginx.ingress.kubernetes.io/auth-response-headers: X-Vouch-User
+              nginx.ingress.kubernetes.io/auth-snippet: |
+                # these return values are used by the @error401 call
+                auth_request_set $auth_resp_jwt $upstream_http_x_vouch_jwt;
+                auth_request_set $auth_resp_err $upstream_http_x_vouch_err;
+                auth_request_set $auth_resp_failcount $upstream_http_x_vouch_failcount;
             enabled: true
             ingressClassName: nginx
             hosts:
@@ -74,10 +79,7 @@ spec:
           annotations: {}
           ingress:
             enabled: true
-            annotations:
-              nginx.ingress.kubernetes.io/rewrite-target: /
-              nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
-              nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+            annotations: {}
             ingressClassName: nginx
             hosts:
               - alert.cloudydev.net

@@ -28,7 +28,6 @@ spec:
               nginx.ingress.kubernetes.io/auth-url: https://vouch.cloudydev.net/validate
               nginx.ingress.kubernetes.io/auth-response-headers: X-Vouch-User
               nginx.ingress.kubernetes.io/auth-snippet: |
-              # these return values are used by the @error401 call
                 auth_request_set $auth_resp_jwt $upstream_http_x_vouch_jwt;
                 auth_request_set $auth_resp_err $upstream_http_x_vouch_err;
                 auth_request_set $auth_resp_failcount $upstream_http_x_vouch_failcount;            

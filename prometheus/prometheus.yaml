@@ -21,14 +21,10 @@ spec:
       values: |
         prometheus:
           ingress:
-            annotations: {}
             enabled: true
             ingressClassName: nginx
             hosts:
               - prometheus.cloudydev.net
-            paths: 
-              - /
-              pathType: Prefix
             tls:
               - secretName: letsencrypt-staging
                 hosts:
@@ -77,7 +73,6 @@ spec:
               - alert.cloudydev.net
             paths: 
               - /
-              pathType: Prefix
             tls:
               - secretName: letsencrypt-staging
                 hosts:

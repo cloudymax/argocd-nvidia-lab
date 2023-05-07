@@ -37,7 +37,11 @@ Add this yaml for a prometheus scrape configs as a secret
 - job_name: "postgres"
   static_configs:
   - targets: ["postgres-postgresql-metrics.default.svc.cluster.local:9187"]
+- job_name: "nvidia-smi"
+  static_configs:
+  - targets: ["nvidia-dcgm-exporter.default.svc.cluster.local:9400"]
 ```
+
 ```bash
 kubectl create secret generic additional-scrape-configs --from-file=prometheus-additional.yaml \
     --dry-run=client -oyaml > additional-scrape-configs.yaml

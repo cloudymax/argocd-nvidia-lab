@@ -26,6 +26,15 @@ spec:
       values: |
         loki:
           isDefault: false
+          storageConfig:
+            tsdb_shipper:
+              active_index_directory: /data/tsdb-index
+              cache_location: /data/tsdb-cache
+              index_gateway_client:
+                # only applicable if using microservices where index-gateways are independently deployed.
+                # This example is using kubernetes-style naming.
+                server_address: dns:///index-gateway.monitoring.svc.cluster.local:9095
+    shared_store: gcs
         promtail:
           enabled: true
           extraScrapeConfigs:

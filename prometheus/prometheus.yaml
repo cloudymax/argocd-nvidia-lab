@@ -104,9 +104,10 @@ spec:
               auto_sign_up: true
             users:
               allow_sign_up: false
-              auto_assign_org: true
-              auto_assign_org_role: Editor
-              viewers_can_edit: true
+              #auto_assign_org: true
+              #auto_assign_org_role: Editor
+              #viewers_can_edit: true
+              
           additionalDataSources: []
           ingress:
             enabled: true

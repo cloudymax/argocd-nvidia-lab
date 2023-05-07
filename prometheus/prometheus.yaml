@@ -96,33 +96,26 @@ spec:
           grafana.ini:
             check_for_updates: false
             reporting_enabled: false
-          server:
-            enable_gzip: true
-          security:
-            disable_gravatar: true
-          dashboards:
-            min_refresh_interval: 1s
-          auth.google:
-            enabled: true
-            client_id: 1006740834249-l6kigouj8ujr65f3ac02hv99mrsm42pi.apps.googleusercontent.com
-            client_secret: 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
-            scopes: https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email
-            auth_url: https://accounts.google.com/o/oauth2/auth
-            token_url: https://accounts.google.com/o/oauth2/token
-            allowed_domains: cloudydev.net
-            allow_sign_up: true
+            server:
+              enable_gzip: true
+            security:
+              disable_gravatar: true
+            dashboards:
+              min_refresh_interval: 1s
+            auth.google:
+              enabled: true
+              client_id: 1006740834249-l6kigouj8ujr65f3ac02hv99mrsm42pi.apps.googleusercontent.com
+              client_secret: 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
+              scopes: https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email
+              auth_url: https://accounts.google.com/o/oauth2/auth
+              token_url: https://accounts.google.com/o/oauth2/token
+              allowed_domains: cloudydev.net
+              allow_sign_up: true
           adminPassword: ChangeMe!
           additionalDataSources: []
           ingress:
             enabled: true
             annotations: {}
-            #  nginx.ingress.kubernetes.io/auth-signin: "https://vouch.cloudydev.net/login?url=$scheme://$http_host$request_uri&vouch-failcount=$auth_resp_failcount&X-Vouch-Token=$auth_resp_jwt&error=$auth_resp_err"
-            #  nginx.ingress.kubernetes.io/auth-url: https://vouch.cloudydev.net/validate
-            #  nginx.ingress.kubernetes.io/auth-response-headers: X-Vouch-User
-            #  nginx.ingress.kubernetes.io/auth-snippet: |
-            #    auth_request_set $auth_resp_jwt $upstream_http_x_vouch_jwt;
-            #    auth_request_set $auth_resp_err $upstream_http_x_vouch_err;
-            #    auth_request_set $auth_resp_failcount $upstream_http_x_vouch_failcount;
             ingressClassName: nginx
             hosts:
               - grafana.cloudydev.net

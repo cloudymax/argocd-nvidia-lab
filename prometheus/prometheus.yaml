@@ -96,7 +96,7 @@ spec:
           grafana.ini:
             auth:
               disable_login_form: false
-              signout_redirect_url: "https://grafana.cloudydev.net/login"
+              signout_redirect_url: "https://grafana.cloudydev.net/login/signout"
             auth.proxy:
               enabled: true
               header_name: X-Vouch-User

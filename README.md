@@ -112,6 +112,28 @@ argocd app create app-of-apps --repo https://github.com/cloudymax/argocd-nvidia-
 argocd app sync app-of-apps
 ```
 
+## Argo Workflows CLI
+Check for latest release at https://github.com/argoproj/argo-workflows/releases
+
+- Linux
+ 
+```bash
+# Download the binary
+curl -sLO https://github.com/argoproj/argo-workflows/releases/download/v3.4.7/argo-linux-amd64.gz
+
+# Unzip
+gunzip argo-linux-amd64.gz
+
+# Make binary executable
+chmod +x argo-linux-amd64
+
+# Move binary to path
+mv ./argo-linux-amd64 /usr/local/bin/argo
+
+# Test installation
+argo version
+```
+
 ## validate virtualization support
 
 ```bash

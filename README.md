@@ -61,9 +61,16 @@ kubectl edit configmap -n ingress-nginx ingress-nginx-controller
 apiVersion: v1
 data:
   # ...
-  enable-owasp-modsecurity-crs: "true"
+  allow-snippet-annotations: "true"
   enable-modsecurity: "true"
-  load-balance: "ewma"
+  enable-owasp-modsecurity-crs: "true"
+  load-balance: ewma
+  modsecurity-snippet: |-
+    SecRuleEngine On
+    SecRequestBodyAccess On
+    SecAuditLog /dev/stdout
+    SecAuditLogType Serial
+    SecAuditLogFormat JSON
   # ...
 ```
 

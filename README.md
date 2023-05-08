@@ -3,14 +3,17 @@
 An ArgoCD [app-of-apps] to deploy a Nvidia-based HPC cluster on [smol-k8s-lab].
 
 ## Contents
+| Role | Service |
+| ---  | ---     |
+| Metrics & Dashboards | Kube-prometheus-stack + Extra Scrape targets |
+| Log Aggregation | Loki-stack + Extra Scrape targets |
+| GPU Management | Nvidia GPU Operator |
+| SSO/Oauth | Vouch Proxy |
+| Virtual Machines | Kubervirt |
 
-1. Kube-prometheus-stack
-2. Loki-stack
-3. Nvidia GPU Operator
-4. Extra Scrape targets
-5. Dashboards (wip)
-6. Production ClusterIssuer (not set as default in apps yet)
-7. kubevirt
+## Reccomended Dashboards
+- https://grafana.com/grafana/dashboards/15172-node-exporter-for-prometheus-dashboard-based-on-11074/
+- https://grafana.com/grafana/dashboards/14314-kubernetes-nginx-ingress-controller-nextgen-devops-nirvana/
 
 ## Extras
 

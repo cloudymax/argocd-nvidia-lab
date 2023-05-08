@@ -112,6 +112,14 @@ argocd app create app-of-apps --repo https://github.com/cloudymax/argocd-nvidia-
 argocd app sync app-of-apps
 ```
 
+## Install Argo Rollouts plugin
+
+Other install methods: https://github.com/argoproj/argo-rollouts/blob/master/docs/installation.md#kubectl-plugin-installation
+
+```bash
+brew install argoproj/tap/kubectl-argo-rollouts
+```
+
 ## Argo Workflows CLI
 Check for latest release at https://github.com/argoproj/argo-workflows/releases
 

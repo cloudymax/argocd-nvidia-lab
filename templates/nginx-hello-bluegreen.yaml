@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/cloudymax/argocd-nvidia-lab.git
-    path: nginx-hello/nginx-hello/rollouts/
+    path: nginx-hello/rollouts/
   destination:
     server: "https://kubernetes.default.svc"
     namespace: nginx-hello-bluegreen

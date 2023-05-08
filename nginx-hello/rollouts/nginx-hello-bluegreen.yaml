@@ -80,7 +80,7 @@ spec:
   tls:
     - hosts:
       - nginx-hello.cloudydev.net
-      secretName: "nginx-hello-bluegreen-tls"
+      secretName: "bluegreen-tls"
   rules:
   - host: nginx-hello.cloudydev.net
     http:

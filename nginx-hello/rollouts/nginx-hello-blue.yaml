@@ -30,7 +30,7 @@ metadata:
   namespace: nginx-hello-rollout
 spec:
   selector:
-    app: nginx-hello
+    app: nginx-hello-rollout-blue
   ports:
     - protocol: TCP
       port: 5000

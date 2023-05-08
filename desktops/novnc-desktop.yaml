@@ -25,16 +25,16 @@ spec:
         - name: "HTTP_PASSWORD"
           value: "demopass123"
         - name: "RESOLUTION"
-          value: "1680x1050"
+          value: "1366x768"
         ports:
         - containerPort: 80
         resources:
           requests:
-            memory: "250Mi"
-            cpu: "250m"
-          limits:
-            memory: "500Mi"
-            cpu: "500m"
+            memory: "1024Mi"
+            cpu: "1000m"
+          #limits:
+          #  memory: "4000Mi"
+          #  cpu: "4000m"
 ---
 apiVersion: v1
 kind: Service
@@ -54,11 +54,19 @@ kind: Ingress
 metadata:
   name: remote-desktop-ingress
   namespace: novnc
+  annotations:
+    nginx.ingress.kubernetes.io/auth-signin: "https://vouch.cloudydev.net/login?url=$scheme://$http_host$request_uri&vouch-failcount=$auth_resp_failcount&X-Vouch-Token=$auth_resp_jwt&error=$auth_resp_err"
+    nginx.ingress.kubernetes.io/auth-url: https://vouch.cloudydev.net/validate
+    nginx.ingress.kubernetes.io/auth-response-headers: X-Vouch-User
+    nginx.ingress.kubernetes.io/auth-snippet: |
+      auth_request_set $auth_resp_jwt $upstream_http_x_vouch_jwt;
+      auth_request_set $auth_resp_err $upstream_http_x_vouch_err;
+      auth_request_set $auth_resp_failcount $upstream_http_x_vouch_failcount;
 spec:
   tls:
     - hosts:
       - novnc.cloudydev.net
-      secretName: letsencrypt-prod
+      secretName: novnc-tls
   ingressClassName: nginx
   rules:
   - host: novnc.cloudydev.net

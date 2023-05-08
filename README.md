@@ -120,6 +120,10 @@ Other install methods: https://github.com/argoproj/argo-rollouts/blob/master/doc
 brew install argoproj/tap/kubectl-argo-rollouts
 ```
 
+```bash
+kubectl argo rollouts get rollout rollout-bluegreen -n nginx-hello-bluegreen --watch
+```
+
 ## Argo Workflows CLI
 Check for latest release at https://github.com/argoproj/argo-workflows/releases
 

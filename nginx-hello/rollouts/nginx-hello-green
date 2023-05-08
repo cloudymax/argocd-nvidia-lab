@@ -6,19 +6,19 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-hello-rollout-blue
+  name: nginx-hello-rollout-green
   namespace: nginx-hello-rollout
 spec:
   selector:
     matchLabels:
-      app: nginx-hello-rollout-blue
+      app: nginx-hello-rollout-green
   template:
     metadata:
       labels:
-        app: nginx-hello-rollout-blue
+        app: nginx-hello-rollout-green
     spec:
       containers:
-      - name: nginx-hello-rollout-blue
+      - name: nginx-hello-rollout-green
         image: nginx
         ports:
         - containerPort: 80
@@ -26,11 +26,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-hello-rollout-blue-service
+  name: nginx-hello-rollout-green-service
   namespace: nginx-hello-rollout
 spec:
   selector:
-    app: nginx-hello
+    app: nginx-hello-rollout-green
   ports:
     - protocol: TCP
       port: 5000
@@ -39,7 +39,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nginx-hello-rollout-blue-ingress
+  name: nginx-hello-rollout-green-ingress
   namespace: nginx-hello-rollout
   annotations:
     kubernetes.io/ingress.class: nginx

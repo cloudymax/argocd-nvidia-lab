@@ -91,4 +91,4 @@ spec:
           service:
             name: nginx-hello-service
             port:
-              number: 8080
+              number: 80

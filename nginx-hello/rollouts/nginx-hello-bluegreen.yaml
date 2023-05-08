@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: nginx-hello-bluegreen
-        image: nginx/rollouts-demo:blue
+        image: argoproj/rollouts-demo:blue
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

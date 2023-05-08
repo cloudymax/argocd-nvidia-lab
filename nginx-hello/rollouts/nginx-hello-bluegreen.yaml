@@ -14,7 +14,7 @@ spec:
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: rnginx-hello-bluegreen
+      app: nginx-hello-bluegreen
   template:
     metadata:
       labels:

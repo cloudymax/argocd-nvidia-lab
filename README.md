@@ -66,10 +66,11 @@ data:
   enable-owasp-modsecurity-crs: "true"
   load-balance: ewma
   modsecurity-snippet: |-
-    SecRuleEngine On
+    SecRuleEngine DetectionOnly
+    SecAuditEngine RelevantOnly
+    SecStatusEngine On
     SecRequestBodyAccess On
     SecAuditLog /dev/stdout
-    SecAuditLogType Serial
     SecAuditLogFormat JSON
   # ...
 ```

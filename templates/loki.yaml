@@ -37,7 +37,7 @@ spec:
               shared_store: gcs
         promtail:
           enabled: true
-          extraScrapeConfigs:
+          extraScrapeConfigs: |
             - job_name: system
               static_configs:
               - targets:

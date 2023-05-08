@@ -51,7 +51,7 @@ spec:
     app: nginx-hello-bluegreen
   ports:
     - protocol: TCP
-      port: 8888
+      port: 8000
       targetPort: 8080
 ---
 apiVersion: v1
@@ -64,7 +64,7 @@ spec:
     app: nginx-hello-bluegreen
   ports:
     - protocol: TCP
-      port: 8888
+      port: 7000
       targetPort: 8080
 ---
 apiVersion: networking.k8s.io/v1
@@ -83,6 +83,26 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: nginx-hello-service
+            name: nginx-hello-bluegreen-active
             port:
-              number: 8888
+              number: 8000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-hello-bluegreen-ingress
+  namespace: nginx-hello-bluegreen
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: preview-nginx-hello.cloudydev.net
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-hello-bluegreen-preview
+            port:
+              number: 7000

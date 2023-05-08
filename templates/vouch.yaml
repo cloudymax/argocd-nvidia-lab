@@ -21,8 +21,8 @@ spec:
         config:
           vouch:
             port: 9090
-            domains: []
-            allowAllUsers: true
+            domains: [ "cloudydev.net" ]
+            allowAllUsers: false
             whiteList: []
             jwt:
               secret: ''
@@ -37,7 +37,7 @@ spec:
             client_secret: 
             callback_urls: 
               - https://vouch.cloudydev.net/auth
-            preferredDomain:
+            preferredDomain: cloudydev.net
         ingress:
           enabled: true
           annotations:

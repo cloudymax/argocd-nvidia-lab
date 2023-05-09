@@ -48,12 +48,12 @@ spec:
           hosts:
             - vouch.buildstars.online
           tls:
-            - secretName: vouch-tls
+            - secretName: vouch-buildstars-tls
               hosts:
                 - vouch.buildstars.online
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: vouch
+    namespace: vouch-buildstars
   syncPolicy:
     syncOptions:
       - CreateNamespace=true

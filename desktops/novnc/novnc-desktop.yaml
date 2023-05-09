@@ -69,7 +69,7 @@ spec:
       secretName: novnc-tls
   ingressClassName: nginx
   rules:
-  - host: novnc.buildstars.net
+  - host: novnc.buildstars.online
     http:
       paths:
       - path: /

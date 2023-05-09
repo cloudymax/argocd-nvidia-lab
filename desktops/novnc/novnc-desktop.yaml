@@ -63,10 +63,10 @@ metadata:
   #    auth_request_set $auth_resp_err $upstream_http_x_vouch_err;
   #    auth_request_set $auth_resp_failcount $upstream_http_x_vouch_failcount;
 spec:
-  tls:
-    - hosts:
-      - novnc.buildstars.online
-      secretName: novnc-tls
+  #tls:
+  #  - hosts:
+  #    - novnc.buildstars.online
+  #    secretName: novnc-tls
   ingressClassName: nginx
   rules:
   - host: novnc.buildstars.online

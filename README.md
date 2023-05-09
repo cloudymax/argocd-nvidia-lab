@@ -112,16 +112,28 @@ argocd app create app-of-apps --repo https://github.com/cloudymax/argocd-nvidia-
 argocd app sync app-of-apps
 ```
 
-## Install Argo Rollouts plugin
+## Install Argo Rollouts
 
 Other install methods: https://github.com/argoproj/argo-rollouts/blob/master/docs/installation.md#kubectl-plugin-installation
 
+Inatlls plugin
 ```bash
 brew install argoproj/tap/kubectl-argo-rollouts
 ```
 
+Watch a rollout
 ```bash
 kubectl argo rollouts get rollout rollout-bluegreen -n nginx-hello-bluegreen --watch
+```
+
+Change rollout image:
+```bash
+kubectl argo rollouts set image rollout-bluegreen nginx-hello-bluegreen=argoproj/rollouts-demo:yellow -n nginx-hello-bluegreen
+```
+
+Promote rollout:
+```bash
+kubectl argo rollouts promote rollout-bluegreen -n nginx-hello-bluegreen
 ```
 
 ## Argo Workflows CLI

@@ -1,0 +1,62 @@
+# Vouch Proxy (VP) is an SSO and OAuth / OIDC login solution for Nginx using 
+# the auth_request module. It forces visitors to login and authenticate with 
+# an Identity Provider before allowing them access to a website.
+# https://github.com/vouch/vouch-proxy
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vouch
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  project: default
+  source:
+    repoURL: 'https://vouch.github.io/helm-charts/'
+    targetRevision: 3.1.0
+    chart: vouch
+    helm:
+      values: |
+        config:
+          vouch:
+            port: 9090
+            domains: []
+            allowAllUsers: true
+            whiteList: []
+            jwt:
+              secret: ''
+              maxAge: 900
+            cookie:
+              maxAge: 900
+              domain: buildstars.online
+            testing: false
+          oauth:
+            provider: google
+            client_id: 
+            client_secret: 
+            callback_urls: 
+              - https://vouch.buildstars.online/auth
+            preferredDomain:
+        ingress:
+          enabled: true
+          annotations:
+            kubernetes.io/ingress.class: nginx
+            cert-manager.io/cluster-issuer: letsencrypt-staging
+          paths:
+            - /
+          hosts:
+            - vouch.buildstars.online
+          tls:
+            - secretName: vouch-tls
+              hosts:
+                - vouch.buildstars.online
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: vouch
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

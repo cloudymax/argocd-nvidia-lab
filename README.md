@@ -72,6 +72,8 @@ data:
     SecRequestBodyAccess On
     SecAuditLog /dev/stdout
     SecAuditLogFormat JSON
+    SecRuleRemoveById 920420
+    SecRuleRemoveById 920350
   # ...
 ```
 

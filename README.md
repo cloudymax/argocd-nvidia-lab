@@ -106,8 +106,9 @@ argocd login argocd.cloudydev.net --username admin \
 ## Postgres secret
 
 ```
+kubectl create namespace postgres
 kubectl create secret generic postgres \
-    --namespace cosmos \
+    --namespace postgres \
     --from-literal=POSTGRES_USER_PASSWORD="reopen-tapping-customize" \
     --from-literal=POSTGRES_ADMIN_PASSWORD="flattered-tropics-tidings" \
     --from-literal=POSTGRES_REPLICATION_PASSWORD="blurb-barber-liable"

@@ -49,6 +49,7 @@ Add this yaml for a prometheus scrape configs as a secret
 kubectl create secret generic additional-scrape-configs --from-file=prometheus-additional.yaml \
     --dry-run=client -oyaml > additional-scrape-configs.yaml
 ```
+
 ## NGINX MOD Security + Metrics
 
 Update the Nginx configmap:
@@ -86,7 +87,7 @@ helm upgrade ingress-nginx ingress-nginx \
 --set-string controller.podAnnotations."prometheus\.io/port"="10254"
 ```
 
-- Install the ArgoCD CLI and log in
+## Install the ArgoCD CLI and log in
 
 ```bash
 # Install the argocd CLI
@@ -102,7 +103,16 @@ argocd login argocd.cloudydev.net --username admin \
     --password $(bw get password argocd.cloudydev.net)
 ```
 
-- Deploy the app of apps
+## Postgres secret
+
+```
+kubectl create secret generic postgres \
+    --namespace cosmos \
+    --from-literal=POSTGRES_USER_PASSWORD="reopen-tapping-customize" \
+    --from-literal=POSTGRES_ADMIN_PASSWORD="flattered-tropics-tidings" \
+    --from-literal=POSTGRES_REPLICATION_PASSWORD="blurb-barber-liable"
+```
+## Deploy the app of apps
 
 ```bash
 # deploy the app of apps
@@ -165,6 +175,7 @@ argo version
 ```bash
 virt-host-validate qemu
 ```
+
 ## Kubevirt Dashboard
 
 - https://grafana.com/grafana/dashboards/11748-kubevirt/

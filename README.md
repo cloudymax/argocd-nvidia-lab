@@ -157,7 +157,7 @@ psql \
  --host=85.10.207.24  \
  --dbname=benchmarks  \
  -t  \
- -c "INSERT INTO pcmark VALUES ($id, '$vendor', '$machine_name', $cpu_alias, '$baseline_info', '$version', '$results', '$system_info')"
+ -c "INSERT INTO pcmark VALUES ($id, '$vendor', '$machine_name', '$cpu_alias', '$baseline_info', '$version', '$results', '$system_info')"
 ```
 
 ## Query Benchmarks

@@ -109,9 +109,9 @@ argocd login argocd.cloudydev.net --username admin \
 kubectl create namespace postgres
 kubectl create secret generic postgres \
     --namespace postgres \
-    --from-literal=POSTGRES_USER_PASSWORD="reopen-tapping-customize" \
-    --from-literal=POSTGRES_ADMIN_PASSWORD="flattered-tropics-tidings" \
-    --from-literal=POSTGRES_REPLICATION_PASSWORD="blurb-barber-liable"
+    --from-literal=POSTGRES_USER_PASSWORD="" \
+    --from-literal=POSTGRES_ADMIN_PASSWORD="" \
+    --from-literal=POSTGRES_REPLICATION_PASSWORD=""
 ```
 ## Deploy the app of apps
 

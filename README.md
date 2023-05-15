@@ -113,6 +113,12 @@ kubectl create secret generic postgres \
     --from-literal=POSTGRES_ADMIN_PASSWORD="" \
     --from-literal=POSTGRES_REPLICATION_PASSWORD=""
 ```
+
+## Postgres connections
+
+```bash
+psql postgres://admin:<password>@<ip>:5432/postgres
+```
 ## Deploy the app of apps
 
 ```bash

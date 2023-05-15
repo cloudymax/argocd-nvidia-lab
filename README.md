@@ -125,6 +125,9 @@ CREATE DATABASE benchmarks;
 
 CREATE TABLE pcmark (
   id INTEGER NOT NULL,
+  vendor TEXT NOT NULL,
+  machine_name TEXT NOT NULL,
+  cpu_alias TEXT,
   baseline_info JSONB,
   version JSONB,
   results JSONB,
@@ -137,13 +140,16 @@ CREATE TABLE pcmark (
 ```bash
 Run benchmark
 
-machine_name="ax102-2"
+export id=0
+export machine_name="ax102"
+export vendor="hetzner"
+export cpu_alias="7950X3D"
 export baseline_info=$(yq -o=json -I=0 '.BaselineInfo' results_all.yml)
 export version=$(yq -o=json -I=0 '.Version' results_all.yml)
 export results=$(yq -o=json -I=0 '.Results' results_all.yml)
 export system_info=$(yq -o=json -I=0 '.SystemInformation' results_all.yml)
 
-PGPASSWORD=flattered-tropics-tidings \
+PGPASSWORD= \
 psql \
  --username=admin  \
  --port=5432  \
@@ -151,20 +157,24 @@ psql \
  --host=85.10.207.24  \
  --dbname=benchmarks  \
  -t  \
- -c "INSERT INTO pcmark VALUES (1, '$baseline_info', '$version', '$results', '$system_info')"
+ -c "INSERT INTO pcmark VALUES ($id, '$vendor', '$machine_name', $cpu_alias, '$baseline_info', '$version', '$results', '$system_info')"
 ```
 
 ## Query Benchmarks
 
 ```bash
-PGPASSWORD=flattered-tropics-tidings \
+PGPASSWORD=\
 psql \
  --username=admin  \
  --port=5432  \
  --no-password  \
  --host=85.10.207.24  \
  --dbname=benchmarks  \
- -c "SELECT system_info->>'Processor' AS cpu, results->>'CPU_SINGLETHREAD' AS single_threaded FROM pcmark"
+ -c "SELECT vendor AS vendor, 
+  machine_name AS machine_name, 
+  cpu_alias AS cpu_alias, 
+  system_info->>'Processor' AS cpu, 
+  results->>'CPU_SINGLETHREAD' AS single_threaded FROM pcmark"
 ```
 
 ## Deploy the app of apps

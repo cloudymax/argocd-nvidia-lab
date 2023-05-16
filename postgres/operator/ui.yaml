@@ -1,3 +1,5 @@
+# Helm Values:
+# https://github.com/zalando/postgres-operator/blob/master/charts/postgres-operator-ui/values.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:

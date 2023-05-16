@@ -48,8 +48,8 @@ spec:
           value: "edge"
         - name: PROXY_ADDRESS_FORWARDING
           value: "true"
-        - name: KC_HTTP_RELAITVE_PATH
-          value: "/admin"
+        #- name: KC_HTTP_RELAITVE_PATH
+        #  value: "/admin"
         - name: KC_DB
           value: "postgres"
         - name: KC_DB_SCHEMA

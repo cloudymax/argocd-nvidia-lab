@@ -42,7 +42,7 @@ spec:
           value: "passthrough"
         - name: KC_DB
           value: "postgres"
-        - name: KC_DB_URL
+        - name: KC_HOSTNAME
           value: "85.10.207.28"
         - name: KC_DB_USERNAME
           value: "max"

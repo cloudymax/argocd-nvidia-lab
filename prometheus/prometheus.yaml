@@ -103,7 +103,6 @@ spec:
               root_url: https://grafana.cloudydev.net
               domain: cloudydev.net
               protocol: https
-              http_port: 3000
             auth.generic_oauth:
               enabled: true
               name: Keycloak-OAuth

@@ -113,6 +113,10 @@ kubectl create secret generic postgres \
     --from-literal=POSTGRES_ADMIN_PASSWORD="" \
     --from-literal=POSTGRES_REPLICATION_PASSWORD=""
 ```
+## Postgres Benchmarks
+
+1. https://github.com/AbdallahCoptan/PostGreSQL-Bench/blob/master/Pgbench.md
+2. https://computingforgeeks.com/install-postgresql-12-on-ubuntu/
 
 ## Postgres Setup
 

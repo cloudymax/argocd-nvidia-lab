@@ -43,11 +43,11 @@ spec:
         - name: KC_DB
           value: "postgres"
         - name: KC_HOSTNAME
-          value: "85.10.207.28"
+          value: "85.10.207.24"
         - name: KC_DB_USERNAME
-          value: "max"
+          value: "postgres"
         - name: KC_DB_PASSWORD
-          value: "Og5I48RAQaY85j0GwD6RY1Jemow3dKOklqUnjzmiyT22oeRqLmbsl3DjOoYHSMWv"
+          value: "flattered-tropics-tidings"
         ports:
         - name: http
           containerPort: 8080

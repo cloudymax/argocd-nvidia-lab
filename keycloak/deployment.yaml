@@ -37,8 +37,6 @@ spec:
           value: "admin"
         - name: KEYCLOAK_ADMIN_PASSWORD
           value: "admin"
-        - name: KC_PROXY
-          value: "edge"
         ports:
         - name: http
           containerPort: 8080
@@ -52,12 +50,13 @@ kind: Ingress
 metadata:
   name: keycloak
   annotations:
+    kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: "letsencrypt-staging"
-    kubernetes.io/tls-acme: "true" 
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   tls:
     - hosts:
-        - keycloak.cloudydev.net
+      - keycloak.cloudydev.net
       secretName: keycloak-tls
   rules:
   - host: keycloak.cloudydev.net

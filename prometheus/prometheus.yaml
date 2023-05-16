@@ -96,9 +96,23 @@ spec:
                 - alert.cloudydev.net
         grafana:
           grafana.ini:
-            auth:
-              disable_login_form: false
-              signout_redirect_url: "https://grafana.cloudydev.net/login/signout"
+            #auth:
+            #  disable_login_form: false
+            #  signout_redirect_url: "https://grafana.cloudydev.net/login/signout"
+            auth.generic_oauth:
+              enabled: true
+              name: Keycloak-OAuth
+              allow_sign_up: true
+              client_id: cloudydev
+              client_secret: KkzKpIBWaNyKCzWVF2aUuqZkyDP1nOWs
+              scopes: openid email profile offline_access roles
+              email_attribute_path: email
+              login_attribute_path: username
+              name_attribute_path: full_name
+              auth_url = https://keycloak.cloudydev.net/realms/cloudydev-net/protocol/openid-connect/auth
+              token_url = https://keycloak.cloudydev.net/realms/cloudydev-net/protocol/openid-connect/token
+              api_url = https://keycloak.cloudydev.net/realms/cloudydev-net/protocol/openid-connect/userinfo
+              role_attribute_path = contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'
             auth.proxy:
               enabled: true
               header_name: X-Vouch-User
@@ -115,18 +129,18 @@ spec:
           ingress:
             enabled: true
             annotations:
-              cert-manager.io/cluster-issuer: "letsencrypt-prod"
-              nginx.ingress.kubernetes.io/auth-signin: "https://vouch.cloudydev.net/login?url=$scheme://$http_host$request_uri&vouch-failcount=$auth_resp_failcount&X-Vouch-Token=$auth_resp_jwt&error=$auth_resp_err"
-              nginx.ingress.kubernetes.io/auth-url: https://vouch.cloudydev.net/validate
-              nginx.ingress.kubernetes.io/auth-response-headers: X-Vouch-User
-              nginx.ingress.kubernetes.io/auth-snippet: |
-                auth_request_set $auth_resp_jwt $upstream_http_x_vouch_jwt;
-                auth_request_set $auth_resp_err $upstream_http_x_vouch_err;
-                auth_request_set $auth_resp_failcount $upstream_http_x_vouch_failcount;
-                auth_request_set $user   $upstream_http_x_auth_request_user;
-                auth_request_set $email  $upstream_http_x_auth_request_email;
-                proxy_set_header X-User  $user;
-                proxy_set_header X-Email $email;
+              cert-manager.io/cluster-issuer: "letsencrypt-staging"
+              #nginx.ingress.kubernetes.io/auth-signin: "https://vouch.cloudydev.net/login?url=$scheme://$http_host$request_uri&vouch-failcount=$auth_resp_failcount&X-Vouch-Token=$auth_resp_jwt&error=$auth_resp_err"
+              #nginx.ingress.kubernetes.io/auth-url: https://vouch.cloudydev.net/validate
+              #nginx.ingress.kubernetes.io/auth-response-headers: X-Vouch-User
+              #nginx.ingress.kubernetes.io/auth-snippet: |
+              #  auth_request_set $auth_resp_jwt $upstream_http_x_vouch_jwt;
+              #  auth_request_set $auth_resp_err $upstream_http_x_vouch_err;
+              #  auth_request_set $auth_resp_failcount $upstream_http_x_vouch_failcount;
+              #  auth_request_set $user   $upstream_http_x_auth_request_user;
+              #  auth_request_set $email  $upstream_http_x_auth_request_email;
+              #  proxy_set_header X-User  $user;
+              #  proxy_set_header X-Email $email;
             ingressClassName: nginx
             hosts:
               - grafana.cloudydev.net

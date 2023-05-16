@@ -13,7 +13,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/cloudymax/argocd-nvidia-lab.git
-    path: postgres-operator/
+    path: postgres/operator/
   destination:
     server: "https://kubernetes.default.svc"
     namespace: postgres-operator

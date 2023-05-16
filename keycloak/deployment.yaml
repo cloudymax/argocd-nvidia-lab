@@ -54,7 +54,7 @@ spec:
           value : "80"
         - name: KEYCLOAK_HTTPS_PORT
           value: "443"
-        - name : KEYCLOAK_HOSTNAME
+        - name : KC_HOSTNAME
           value : "vpc"
         ports:
         - name: http

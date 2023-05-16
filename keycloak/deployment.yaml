@@ -32,7 +32,7 @@ spec:
       - name: keycloak
         image: quay.io/keycloak/keycloak:21.1.1
         args: 
-          - "start" 
+          - "start-dev" 
           - "--optimized"
           - "--hostname-strict-https=false" 
           - "--hostname-strict=false"

@@ -46,6 +46,8 @@ spec:
           value: "jdbc:postgresql://85.10.207.24:5432/keycloak"
         - name: KC_DB_USERNAME
           value: "admin"
+        - name: KC_HOSTNAME
+          value: "keycloak"
         - name: KC_DB_PASSWORD
           value: "flattered-tropics-tidings"
         ports:

@@ -48,6 +48,8 @@ spec:
           value: "admin"
         - name: KC_HOSTNAME
           value: "keycloak"
+        - name: KC_HOSTNAME_STRICT_BACKCHANNEL
+          value: "true"
         - name: KC_DB_PASSWORD
           value: "flattered-tropics-tidings"
         ports:

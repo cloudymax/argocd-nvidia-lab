@@ -53,7 +53,7 @@ spec:
         - name: KC_DB
           value: "postgres"
         - name: KC_DB_SCHEMA
-          value: "publoc"
+          value: "public"
           value: "jdbc:postgresql://85.10.207.24:5432/keycloak"
         - name: KC_DB_URL_DATABASE
           value: "keycloak"
@@ -64,7 +64,7 @@ spec:
         - name: KC_HOSTNAME
           value: "keycloak.cloudydev.net"
         - name : KC_HOSTNAME_STRICT
-          value : "false"
+          value: "false"
         - name: KC_DB_USERNAME
           value: "admin"
         - name: KC_DB_PASSWORD

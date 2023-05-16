@@ -52,6 +52,8 @@ spec:
           value: "flattered-tropics-tidings"
         - name : KC_HOSTNAME_STRICT
           value : "false"
+        - name: KC_HOSTNAME
+          value: "keycloak.cloudydev.net"
         ports:
         - name: http
           containerPort: 8080

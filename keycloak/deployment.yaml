@@ -41,7 +41,7 @@ spec:
         - name: KC_PROXY
           value: "passthrough"
         - name: KC_DB
-          value: "keycloak"
+          value: "postgres"
         - name: KC_DB_URL
           value: "jdbc:postgresql://85.10.207.24:5432/keycloak"
         - name: KC_DB_USERNAME

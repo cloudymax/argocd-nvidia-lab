@@ -23,7 +23,7 @@ spec:
           # operatorApiUrl: "http://postgres-operator:8080"
           # operatorClusterNameLabel: "cluster-name"
           # resourcesVisible: "False"
-          targetNamespace: "default"
+          # targetNamespace: "default"
           teams:
             - "team-a"
             - "team-b"

@@ -33,7 +33,8 @@ spec:
         image: quay.io/keycloak/keycloak:21.1.1
         args: 
           - "start" 
-          - "--hostname-strict-https=false"
+          - "--optimized"
+          - "--hostname-strict-https=false" 
           - "--hostname-strict=false"
         env:
         - name: KEYCLOAK_ADMIN

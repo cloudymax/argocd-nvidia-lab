@@ -12,6 +12,11 @@ spec:
     repoURL: 'https://opensource.zalando.com/postgres-operator/charts/postgres-operator'
     targetRevision: 1.10.0
     chart: postgres-operator
+    helm:
+      skipCrds: true
+      values: |
+        configLoadBalancer:
+          db_hosted_zone: db.cloudydev.net
   project: default
   syncPolicy:
     syncOptions:

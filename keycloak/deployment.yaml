@@ -38,22 +38,37 @@ spec:
           value: "admin"
         - name: KEYCLOAK_ADMIN_PASSWORD
           value: "admin"
+        - name: KC_HTTPS_PORT
+          value: "8443"
+        - name: KC_HTTP_ENABLED
+          value: "true"
+        - name: KC_HTTP_PORT
+          value: "8080"
+        - name: KC_PROXY
+          value: "edge"
         - name: PROXY_ADDRESS_FORWARDING
           value: "true"
-        - name: DB_VENDOR
-          value: POSTGRES
-        - name: DB_ADDR
+        - name: KC_HTTP_RELAITVE_PATH
+          value: "/admin"
+        - name: KC_DB
+          value: "postgres"
+        - name: KC_DB_SCHEMA
+          value: "publoc"
           value: "jdbc:postgresql://85.10.207.24:5432/keycloak"
-        - name: DB_DATABASE
+        - name: KC_DB_URL_DATABASE
           value: "keycloak"
-        - name: DB_USER
-          value: "admin"
-        - name: DB_PASSWORD
-          value: "flattered-tropics-tidings"
-        - name : KC_HOSTNAME_STRICT
-          value : "false"
+        - name: KC_DB_URL_HOST
+          value: "85.10.207.24"
+        - name: KC_DB_URL_PORT
+          value: "5432"
         - name: KC_HOSTNAME
           value: "keycloak.cloudydev.net"
+        - name : KC_HOSTNAME_STRICT
+          value : "false"
+        - name: KC_DB_USERNAME
+          value: "admin"
+        - name: KC_DB_PASSWORD
+          value: "flattered-tropics-tidings"
         ports:
         - name: http
           containerPort: 8080

@@ -31,7 +31,8 @@ spec:
       containers:
       - name: keycloak
         image: quay.io/keycloak/keycloak:21.1.1
-        args: ["start-dev"]
+        args: 
+          - "start-dev" 
         env:
         - name: KEYCLOAK_ADMIN
           value: "admin"
@@ -39,6 +40,14 @@ spec:
           value: "admin"
         - name: KC_PROXY
           value: "passthrough"
+        - name: KC_DB
+          value: "postgres"
+        - name: KC_DB_URL
+          value: "85.10.207.28"
+        - name: KC_DB_USERNAME
+          value: "max"
+        - name: KC_DB_PASSWORD
+          value: "Og5I48RAQaY85j0GwD6RY1Jemow3dKOklqUnjzmiyT22oeRqLmbsl3DjOoYHSMWv"
         ports:
         - name: http
           containerPort: 8080

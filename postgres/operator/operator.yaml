@@ -15,8 +15,8 @@ spec:
     helm:
       skipCrds: true
       values: |
-        configLoadBalancer:
-          db_hosted_zone: db.cloudydev.net
+        # configLoadBalancer:
+        #  db_hosted_zone: db.cloudydev.net
   project: default
   syncPolicy:
     syncOptions:

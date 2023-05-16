@@ -42,10 +42,12 @@ spec:
           value: "passthrough"
         - name: KC_DB
           value: "postgres"
+        - name: KC_DB_URL
+          value: "jdbc:postgresql://85.10.207.24:5432/keycloak"
         - name: KC_HOSTNAME
-          value: "85.10.207.24"
+          value: "vpc"
         - name: KC_DB_USERNAME
-          value: "postgres"
+          value: "admin"
         - name: KC_DB_PASSWORD
           value: "flattered-tropics-tidings"
         ports:

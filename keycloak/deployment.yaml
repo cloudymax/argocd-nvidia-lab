@@ -64,9 +64,9 @@ metadata:
 spec:
   tls:
     - hosts:
-      - KEYCLOAK_HOST
+      - keycloak.cloudydev.net
   rules:
-  - host: KEYCLOAK_HOST
+  - host: keycloak.cloudydev.net
     http:
       paths:
       - path: /

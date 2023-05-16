@@ -44,8 +44,6 @@ spec:
           value: "postgres"
         - name: KC_DB_URL
           value: "jdbc:postgresql://85.10.207.24:5432/keycloak"
-        - name: KC_HOSTNAME
-          value: "vpc"
         - name: KC_DB_USERNAME
           value: "postgres"
         - name: KC_DB_PASSWORD

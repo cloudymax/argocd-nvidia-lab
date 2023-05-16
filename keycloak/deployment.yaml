@@ -33,20 +33,34 @@ spec:
         image: quay.io/keycloak/keycloak:21.1.1
         args: 
           - "start"
-          - "--db postgres"
-          - "--db-url jdbc:postgresql://85.10.207.24:5432/keycloak"
-          - "--db-username admin"
-          - "--db-password flattered-tropics-tidings"
         env:
         - name: KEYCLOAK_ADMIN
           value: "admin"
         - name: KEYCLOAK_ADMIN_PASSWORD
           value: "admin"
-        - name: KC_PROXY
-          value: "passthrough"
+        - name: PROXY_ADDRESS_FORWARDING
+          value: "true"
+        - name: DB_VENDOR
+          value: POSTGRES
+        - name: DB_ADDR
+          value: "jdbc:postgresql://85.10.207.24:5432/keycloak"
+        - name: DB_DATABASE
+          value: "keycloak"
+        - name: DB_USER
+          value: "admin"
+        - name: DB_PASSWORD
+          value: "flattered-tropics-tidings"
+        - name : KEYCLOAK_HTTP_PORT
+          value : "80"
+        - name: KEYCLOAK_HTTPS_PORT
+          value: "443"
+        - name : KEYCLOAK_HOSTNAME
+          value : "keycloak.cloudydev.net"
         ports:
         - name: http
           containerPort: 8080
+        - name: https
+          containerPort: 8443
         readinessProbe:
           httpGet:
             path: /realms/master

@@ -28,9 +28,6 @@ spec:
             - "team-a"
             - "team-b"
             - "team-c"
-        service:
-          type: "NodePort"
-          nodePort: 32000
         ingress:
           enabled: true
           ingressClassName: nginx

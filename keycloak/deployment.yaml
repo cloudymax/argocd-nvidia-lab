@@ -54,7 +54,6 @@ spec:
           value: "postgres"
         - name: KC_DB_SCHEMA
           value: "public"
-          value: "jdbc:postgresql://85.10.207.24:5432/keycloak"
         - name: KC_DB_URL_DATABASE
           value: "keycloak"
         - name: KC_DB_URL_HOST

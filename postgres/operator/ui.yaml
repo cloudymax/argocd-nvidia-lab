@@ -30,12 +30,12 @@ spec:
             - "team-c"
         service:
           type: "NodePort"
-          nodePort: 9999
+          nodePort: 32000
         ingress:
           enabled: true
           ingressClassName: nginx
           annotations:
-            cert-manager.io/issuer: "letsencrypt-staging"
+            cert-manager.io/clusterissuer: "letsencrypt-staging"
             kubernetes.io/tls-acme: "true"           
           hosts:
             - host: pg-operator.cloudydev.net

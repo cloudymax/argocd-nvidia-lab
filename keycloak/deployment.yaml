@@ -33,6 +33,8 @@ spec:
         image: quay.io/keycloak/keycloak:21.1.1
         args: 
           - "start" 
+          - "--hostname-strict-https=false"
+          - "--hostname-strict=false"
         env:
         - name: KEYCLOAK_ADMIN
           value: "admin"
@@ -48,8 +50,6 @@ spec:
           value: "admin"
         - name: KC_HOSTNAME
           value: "keycloak"
-        - name: KC_HOSTNAME_STRICT_BACKCHANNEL
-          value: "true"
         - name: KC_DB_PASSWORD
           value: "flattered-tropics-tidings"
         ports:

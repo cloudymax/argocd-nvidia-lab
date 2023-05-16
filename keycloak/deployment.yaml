@@ -32,7 +32,11 @@ spec:
       - name: keycloak
         image: quay.io/keycloak/keycloak:21.1.1
         args: 
-          - "start" 
+          - "start"
+          - "--db postgres"
+          - "--db-url jdbc:postgresql://85.10.207.24:5432/keycloak"
+          - "--db-username admin"
+          - "--db-password flattered-tropics-tidings"
         env:
         - name: KEYCLOAK_ADMIN
           value: "admin"
@@ -40,16 +44,6 @@ spec:
           value: "admin"
         - name: KC_PROXY
           value: "passthrough"
-        - name: KC_DB
-          value: "postgres"
-        - name: KC_DB_URL
-          value: "jdbc:postgresql://85.10.207.24:5432/keycloak"
-        - name: KC_DB_USERNAME
-          value: "admin"
-        - name: KC_HOSTNAME
-          value: "keycloak"
-        - name: KC_DB_PASSWORD
-          value: "flattered-tropics-tidings"
         ports:
         - name: http
           containerPort: 8080

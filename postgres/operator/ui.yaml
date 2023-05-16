@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: >-
       https://opensource.zalando.com/postgres-operator/charts/postgres-operator-ui
-    targetRevision: 1.10.0
+    targetRevision: 1.9.0
     chart: postgres-operator-ui
     helm:
       skipCrds: true
@@ -19,10 +19,10 @@ spec:
         envs:
           # IMPORTANT: While operator chart and UI chart are independent, this is the interface between
           # UI and operator API. Insert the service name of the operator API here!
-          appUrl: "http://localhost:8081"
-          operatorApiUrl: "http://postgres-operator:8080"
-          operatorClusterNameLabel: "cluster-name"
-          resourcesVisible: "False"
+          # appUrl: "http://localhost:8081"
+          # operatorApiUrl: "http://postgres-operator:8080"
+          # operatorClusterNameLabel: "cluster-name"
+          # resourcesVisible: "False"
           targetNamespace: "postgres-clusters"
           teams:
             - "team-a"
@@ -30,6 +30,7 @@ spec:
             - "team-c"
         service:
           type: "NodePort"
+          nodePort: 9999
         ingress:
           enabled: true
           ingressClassName: nginx

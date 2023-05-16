@@ -31,7 +31,7 @@ spec:
       containers:
       - name: keycloak
         image: quay.io/keycloak/keycloak:21.1.1
-        args: ["start-dev"]
+        args: ["start, --proxy=passthrough"]
         env:
         - name: KEYCLOAK_ADMIN
           value: "admin"

@@ -103,8 +103,8 @@ spec:
               enabled: true
               name: Keycloak-OAuth
               allow_sign_up: true
-              client_id: grafana
-              client_secret: OWt4lBiiQO7UDN1BtVXK9mUOkJ5zIGcC
+              client_id: grafana-oauth
+              client_secret: 9qMm3LBKzGGD3csX4Mr5tHGr55iYikMo
               scopes: openid email profile offline_access roles
               email_attribute_path: email
               login_attribute_path: username

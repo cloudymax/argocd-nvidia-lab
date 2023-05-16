@@ -3,7 +3,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: postgres-operator-ui
+  name: pgoperator-ui
 spec:
   destination:
     namespace: postgres-operator

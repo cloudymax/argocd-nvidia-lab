@@ -1,0 +1,52 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: harbor
+spec:
+  destination:
+    namespace: harbor
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://helm.goharbor.io'
+    targetRevision: 1.12.1
+    chart: harbor
+    helm:
+      skipCrds: false
+      values: |
+        expose:
+          type: ingress
+          tls:
+            enabled: true
+            certSource: auto
+          secret:
+            secretName: harbor-tls
+            notarySecretName: habor-notary-tls
+          ingress:
+            hosts:
+              core: core.harbor.cloudydev.net
+              notary: notary.harbor.cloudydev.net
+            className: nginx
+            annotations:
+              cert-manager.io/cluster-issuer: "letsencrypt-staging"
+              nginx.ingress.kubernetes.io/rewrite-target: /
+            notary:
+              annotations:
+                cert-manager.io/cluster-issuer: "letsencrypt-staging"
+                nginx.ingress.kubernetes.io/rewrite-target: /
+            harbor:
+              annotations:
+                cert-manager.io/cluster-issuer: "letsencrypt-staging"
+                nginx.ingress.kubernetes.io/rewrite-target: /
+        externalURL: https://core.harbor.cloudydev.net
+        persistence:
+          enabled: true
+          persistentVolumeClaim:
+            registry:
+            size: 50Gi
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

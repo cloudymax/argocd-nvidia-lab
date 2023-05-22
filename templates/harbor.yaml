@@ -17,7 +17,9 @@ spec:
           type: ingress
           tls:
             enabled: true
-            certSource: auto
+            certSource: secret
+            secret: 
+              secretName: "tls-harbor"
           secret:
             secretName: harbor-tls
             notarySecretName: habor-notary-tls
@@ -27,22 +29,12 @@ spec:
               notary: notary.harbor.cloudydev.net
             className: nginx
             annotations:
-              cert-manager.io/cluster-issuer: "letsencrypt-staging"
-              nginx.ingress.kubernetes.io/rewrite-target: /
-            notary:
-              annotations:
-                cert-manager.io/cluster-issuer: "letsencrypt-staging"
-                nginx.ingress.kubernetes.io/rewrite-target: /
-            harbor:
-              annotations:
-                cert-manager.io/cluster-issuer: "letsencrypt-staging"
-                nginx.ingress.kubernetes.io/rewrite-target: /
+              cert-manager.io/cluster-issuer: "letsencrypt-prod"
+              ngress.kubernetes.io/ssl-redirect: "true"
+              ingress.kubernetes.io/proxy-body-size: "0"
+              nginx.ingress.kubernetes.io/ssl-redirect: "true"
+              nginx.ingress.kubernetes.io/proxy-body-size: "0"
         externalURL: https://core.harbor.cloudydev.net
-        persistence:
-          enabled: true
-          persistentVolumeClaim:
-            registry:
-            size: 50Gi
   project: default
   syncPolicy:
     automated:

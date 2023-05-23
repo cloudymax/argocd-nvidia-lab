@@ -73,6 +73,14 @@ data:
     SecRequestBodyAccess On
     SecAuditLog /dev/stdout
     SecAuditLogFormat JSON
+    SecRequestBodyLimitAction ProcessPartial
+    SecResponseBodyLimitAction ProcessPartial
+    SecRequestBodyLimit 13107200
+    SecRequestBodyNoFilesLimit 131072
+    SecResponseBodyLimit 524288
+    SecPcreMatchLimit 250000
+    SecPcreMatchLimitRecursion 250000
+    SecCollectionTimeout 600
     SecRuleRemoveById 920420
     SecRuleRemoveById 920350
   # ...

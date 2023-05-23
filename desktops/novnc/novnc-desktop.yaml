@@ -32,10 +32,10 @@ spec:
           requests:
             memory: "1024Mi"
             cpu: "1000m"
+          limits:
+            memory: "4000Mi"
+            cpu: "4000m"
             nvidia.com/gpu: 1
-          #limits:
-          #  memory: "4000Mi"
-          #  cpu: "4000m"
 ---
 apiVersion: v1
 kind: Service

@@ -2,7 +2,7 @@
 apiVersion: cdi.kubevirt.io/v1alpha1
 kind: DataVolume
 metadata:
-  name: debian-rom
+  name: debian-disk
   namespace: kubevirt
 spec:
   source:
@@ -14,7 +14,7 @@ spec:
       - ReadWriteOnce
     resources:
       requests:
-        storage: 3Gi
+        storage: 120Gi
 ---
 apiVersion: kubevirt.io/v1
 kind: VirtualMachine
@@ -22,6 +22,7 @@ metadata:
   generation: 1
   labels:
     kubevirt.io/os: linux
+    metallb-service: nginx
   namespace: kubevirt
   name: debian
 spec:
@@ -31,6 +32,7 @@ spec:
       creationTimestamp: null
       labels:
         kubevirt.io/domain: debain
+        metallb-service: nginx
     spec:
       domain:
         features:
@@ -39,34 +41,42 @@ spec:
           smm:
             enabled: true
         cpu:
-          dedicatedCpuPlacement: false
-          isolateEmulatorThread: false
+          model: host-passthrough
           sockets: 1
-          cores: 2
-          threads: 2
+          cores: 4
+          threads: 1
         firmware:
-          # this sets the bootloader type
           bootloader:
             efi: {}
         devices:
           autoattachGraphicsDevice: true
+          inputs:
+          - type: tablet
+            bus: virtio
+            name: tablet1
           disks:
-          - disk:
+          - name: disk0
+            disk:
               bus: virtio
-            name: disk0
-          - cdrom:
+          - name: cloudinitvolume
+            cdrom:
               bus: sata
               readonly: true
-            name: cloudinitvolume
+#          interfaces:
+#            - name: default
+#              masquerade: {}
         machine:
           type: q35
         resources:
           limits:
-            memory: 2Gi
+            memory: 16Gi
+      networks:
+#      - name: default
+#        pod: {}
       volumes:
         - name: disk0
           persistentVolumeClaim:
-            claimName: debian-rom
+            claimName: debian-disk
         - name: cloudinitvolume
           cloudInitNoCloud:
             userData: |
@@ -74,5 +84,13 @@ spec:
               hostname: debian
               ssh_pwauth: True
               disable_root: false
-              ssh_authorized_keys:
-              - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDN8B/72VRHKul81wUDxmoP7YQzsdq4NFnavPImhETfACKpu19IlLf3A2t8S+5NtKT416TY+aBupOdFcHApwFCML4ZKBvNVSDBxHUn60JCRegdDIYXStXC/PazI0/BrH7NDu9jofRYIMlrZZ7iGy+6xPyPD4lNOYHTLahMglu8RH2cwTqrfWnD7tYMm9m9HBVUF3+R1tS1v6KDGlj1Hda7oQKhwEYxc6KQAUXcwup+biA39XdTMEU+dfH/KBRn5EdaWDkeEbxrUGhpKj9H+8/TgUq1WKT8ZC42TGURviw+xmVMhJSoJ6N+GoK/SOS58F7qeq5SHQyktrEjxWVP7rei5idsQ1NIQkYvpcKELXpDuIJIoisdjMNGDdr4i2nWb3493Tmpm+iFSY6Le2o8SQClCE8+9ELk7jToZOLjJT+tT4dq2gc3bryp2A/4NT4U5+mTDkKhnlo53tcZ6tDvJxI6JxU0J5T521fXamTGurY7L8mK2RNE683aZwx66NcDKoQM= friend@vps
+              users:
+               - name: friend
+                 gecos: VM adminsitrator
+                 groups: users, admin, docker, sudo
+                 sudo: ALL=(ALL) NOPASSWD:ALL
+                 shell: /bin/bash
+                 lock_passwd: false
+                 passwd: "$6$rounds=4096$saltsaltlettuce$Lp/FV.2oOgew7GbM6Nr8KMGMBn7iFM0x9ZwLqtx9Y4QJmKvfcnS.2zx4MKmymCPQGpHS7gqYOiqWjvdCIV2uN."
+                 ssh_authorized_keys:
+                   - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC3xEankn5zUklqZ5XVRbjP9XrXmK49VZ4OJqkzRF5JJpolBAwmJIUoww6G51g9IlYWzzijtfRSsQxoZHmHp+sSz/qP5zbjoFVCJ08N0ulqb8okM5C7+uET3dZKxwMT6DLFKSLebYnFlCtbp6VnDvp6gP+ZIesL6cxVWC/fSjTbyesEaNWkigI+2zF3sSDOvrSGvRmQSOfOvdjAY8xvcKkwj4uSXa5qsVM7OX+j+2vARredbvya6YyAkumB9SXVHqnFdOOo1jgMtdNGFPi703dgAnfQp7yafR9Ext46pkO8zcyroysogKjI0HqLqUtV6tAG7NZo4+u8k9uYkZmQa26u2rmkx6kUP1jaDfrSp/33dcCLRVKd/FOiv5Ztwvl71fKh3az9khf/ZxFO2thDy8M0TY46TWs87eow8McNmOJWvsyuvVsI7ZyRhGWQkx7V0vpsd8ClDf91enKt4tBDlTu8PYvI2i2UMCeFb+uSt4c2D/kjTCM/+XPrljLupIfs7pM= max

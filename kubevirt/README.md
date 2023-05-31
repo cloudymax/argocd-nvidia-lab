@@ -22,6 +22,23 @@ Following: https://kubevirt.io/quickstart_cloud/
   sudo install virtctl /usr/local/bin
   ```
 
+- Install libvirt-clients
+
+  ```bash
+  sudo apt-get install -y libvirt-clients
+  ```
+
+- Check host config
+
+  ```bash
+  virt-host-validate qemu
+  QEMU: Checking for hardware virtualization                                 : PASS
+  QEMU: Checking if device /dev/kvm exists                                   : PASS
+  QEMU: Checking if device /dev/kvm is accessible                            : PASS
+  QEMU: Checking if device /dev/vhost-net exists                             : PASS
+  QEMU: Checking if device /dev/net/tun exists                               : PASS
+  ```
+ 
 - Install as a krew plugin
 
   ```bash

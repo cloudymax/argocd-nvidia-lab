@@ -1,3 +1,5 @@
+# The DataVolume is a pre-provisioned storage object holding the persistant volume and disk image
+# It's copied upon new-machine creation more quickly than uploading an image and creating a new PV and PVC
 ---
 apiVersion: cdi.kubevirt.io/v1alpha1
 kind: DataVolume
@@ -24,7 +26,7 @@ metadata:
     kubevirt.io/os: linux
     metallb-service: nginx
   namespace: kubevirt
-  name: debian
+  name: test
 spec:
   runStrategy: "RerunOnFailure"
   template:
@@ -49,6 +51,8 @@ spec:
           bootloader:
             efi: {}
         devices:
+          autoattachPodInterface: true
+          autoattachSerialConsole: true
           autoattachGraphicsDevice: true
           inputs:
           - type: tablet
@@ -64,7 +68,12 @@ spec:
               readonly: true
 #          interfaces:
 #            - name: default
+#              model: virtio
 #              masquerade: {}
+#              ports:
+#                - port: 22
+#                - port: 80
+#                - port: 443
         machine:
           type: q35
         resources:

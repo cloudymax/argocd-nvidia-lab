@@ -22,7 +22,7 @@ spec:
               secretName: "tls-harbor"
           secret:
             secretName: harbor-tls
-            notarySecretName: habor-notary-tls
+            notarySecretName: notary-tls
           ingress:
             hosts:
               core: core.harbor.cloudydev.net

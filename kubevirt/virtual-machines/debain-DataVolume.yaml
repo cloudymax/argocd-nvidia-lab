@@ -4,7 +4,7 @@
 apiVersion: cdi.kubevirt.io/v1alpha1
 kind: DataVolume
 metadata:
-  name: debian-disk
+  name: debian
   namespace: kubevirt
 spec:
   source:
@@ -85,7 +85,7 @@ spec:
       volumes:
         - name: disk0
           persistentVolumeClaim:
-            claimName: debian-disk
+            claimName: debian
         - name: cloudinitvolume
           cloudInitNoCloud:
             userData: |

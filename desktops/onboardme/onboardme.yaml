@@ -19,5 +19,5 @@ spec:
     spec:
       containers:
       - name: onboardme
-        image: jessebot/onboardme:debian12
+        image: jessebot/onboardme:latest
         command: ["/bin/bash", "&"]

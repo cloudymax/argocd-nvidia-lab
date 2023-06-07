@@ -41,8 +41,8 @@ spec:
             mountPath: /etc/nginx/auth.d/
           - name: auth-secret
             mountPath: /etc/nginx/secret.d/
-          - name: prometheus-config
-            mountPath: /etc/nginx/location.d/
+         # - name: prometheus-config
+         #   mountPath: /etc/nginx/location.d/
       serviceAccountName: kubevirt-manager
       restartPolicy: Always
       volumes:
@@ -58,7 +58,7 @@ spec:
           secret:
             secretName: auth-secret
             optional: true
-        - name: prometheus-config
-          configMap:
-            name: prometheus-config
-            optional: true
+        #- name: prometheus-config
+        #  configMap:
+        #    name: prometheus-config
+        #    optional: true

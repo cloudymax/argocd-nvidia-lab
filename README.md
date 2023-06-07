@@ -29,6 +29,24 @@ An ArgoCD [app-of-apps] to deploy a Nvidia-based HPC cluster on [smol-k8s-lab].
 [smol-k8s-lab]: https://github.com/small-hack/smol-k8s-lab "Get started with k0s, k3s, or kind to bootstrap simple projects on kubernetes with a friendly smol vibe. Great for testing webapps and benchmarking."
 [app-of-apps]: https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/ "ArgoCD App-of-Apps pattern documentation"
 
+## ArgoCD Web Terminal
+
+Edit the configmap:
+```bash
+kubectl edit configmap argocd-cm -n argocd
+```
+
+Change exec.enabled to true
+
+```yaml
+apiVersion: v1
+data:
+  admin.enabled: "true"
+  application.instanceLabelKey: argocd.argoproj.io/instance
+  exec.enabled: "true"
+```
+
+
 ## Scrape Configs
 
 Add this yaml for a prometheus scrape configs as a secret

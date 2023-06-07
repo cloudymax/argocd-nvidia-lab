@@ -19,4 +19,5 @@ spec:
     spec:
       containers:
       - name: onboardme
-        image: jessebot/onboardme:latest
+        image: ubuntu:latest
+        command: ["/bin/bash"]

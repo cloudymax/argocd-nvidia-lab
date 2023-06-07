@@ -46,6 +46,24 @@ data:
   exec.enabled: "true"
 ```
 
+Edit the role
+```bash
+kubectl edit role argo-cd-argocd-server -n argocd
+```
+
+Add `pods/exec` to the allowd rules
+```yaml
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  - configmaps
+  - pods/exec
+  verbs:
+```
+
+
 
 ## Scrape Configs
 

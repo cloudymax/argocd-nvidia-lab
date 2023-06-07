@@ -20,4 +20,3 @@ spec:
       containers:
       - name: onboardme
         image: jessebot/onboardme:latest
-        command: ["tail", "-f", "/dev/null"]

@@ -7,10 +7,10 @@ metadata:
     app: kubevirt-manager
     kubevirt-manager.io/version: 1.2.3
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: kubevirt-manager
   ports:
     - protocol: TCP
-      port: 8080
+      port: 80
       targetPort: 8080

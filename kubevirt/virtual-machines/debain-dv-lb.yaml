@@ -1,13 +1,39 @@
 ---
+# namespace for isolation
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: vm0
+---
+# Expose ports via a loadbalancer
+kind: Service
+apiVersion: v1
+metadata:
+  name: vm0-lb
+  namespace: vm0
+spec:
+  externalTrafficPolicy: Local
+  ipFamilies:
+    - IPv4
+  ports:
+    - name: ssh
+      protocol: TCP
+      port: 22
+      targetPort: 22
+  type: LoadBalancer
+  selector:
+    metallb-service: vm0
+---
+# The datavolume is the VM's harddrive
 apiVersion: cdi.kubevirt.io/v1alpha1
 kind: DataVolume
 metadata:
-  name: vm0-datavolume
+  name: vm0-dv
   namespace: vm0
 spec:
   source:
     pvc:
-      namespace: debain12
+      namespace: debian12
       name: debian12-pvc
   pvc:
     accessModes:
@@ -16,23 +42,24 @@ spec:
       requests:
         storage: 120Gi
 ---
+# Create the VM
 apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
   generation: 1
   labels:
     kubevirt.io/os: linux
-    metallb-service: nginx
+    metallb-service: vm0
   namespace: vm0
-  name: test
+  name: vm0
 spec:
   runStrategy: "RerunOnFailure"
   template:
     metadata:
       creationTimestamp: null
       labels:
-        kubevirt.io/domain: debian12
-        metallb-service: nginx
+        kubevirt.io/domain: vm0
+        metallb-service: vm0
     spec:
       domain:
         features:
@@ -66,26 +93,21 @@ spec:
               bus: sata
               readonly: true
             bootOrder: 1
-#          interfaces:
-#            - name: default
-#              model: virtio
-#              masquerade: {}
-#              ports:
-#                - port: 22
-#                - port: 80
-#                - port: 443
+          interfaces:
+            - masquerade: {}
+              name: default
         machine:
           type: q35
         resources:
           limits:
             memory: 16Gi
       networks:
-#      - name: default
-#        pod: {}
+      - name: default
+        pod: {}
       volumes:
         - name: harddrive
           persistentVolumeClaim:
-            claimName: vm0-datavolume
+            claimName: vm0-dv
         - name: cloudinitvolume
           cloudInitNoCloud:
             userData: |

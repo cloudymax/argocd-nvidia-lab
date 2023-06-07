@@ -10,6 +10,9 @@ spec:
     tolerations:
     - key: CriticalAddonsOnly
       operator: Exists
+  config:
+    featureGates:
+    - HonorWaitForFirstConsumer
   workload:
     nodeSelector:
       kubernetes.io/os: linux

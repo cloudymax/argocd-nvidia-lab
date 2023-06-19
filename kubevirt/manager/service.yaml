@@ -7,7 +7,6 @@ metadata:
     app: kubevirt-manager
     kubevirt-manager.io/version: 1.2.3
 spec:
-  type: LoadBalancer
   selector:
     app: kubevirt-manager
   ports:

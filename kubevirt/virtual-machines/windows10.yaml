@@ -1,0 +1,81 @@
+---
+# namespace for isolation
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: windows10
+---
+# Expose ports via a loadbalancer
+kind: Service
+apiVersion: v1
+metadata:
+  name: windows10-lb
+  namespace: vm0
+spec:
+  externalTrafficPolicy: Local
+  ipFamilies:
+    - IPv4
+  ports:
+    - name: ssh
+      protocol: TCP
+      port: 22
+      targetPort: 22
+  type: LoadBalancer
+  selector:
+    metallb-service: windows10
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: windows10-hdd-pvc
+  namespace: windows10
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 64Gi
+---
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: windows10-vm
+spec:
+  running: false
+  template:
+    metadata:
+      labels:
+        kubevirt.io/domain: windows10
+    spec:
+      domain:
+        cpu:
+          cores: 6
+        devices:
+          disks:
+          - bootOrder: 1
+            cdrom:
+              bus: sata
+            name: cdromiso
+          - bootOrder: 2
+            disk:
+              bus: virtio
+            name: harddrive
+          - bootOrder: 3
+            cdrom:
+              bus: sata
+            name: virtiocontainerdisk
+        machine:
+          type: q35
+        resources:
+          requests:
+            memory: 12G
+      volumes:
+      - name: cdromiso
+        persistentVolumeClaim:
+          claimName: windows10-iso-pvc
+      - name: harddrive
+        persistentVolumeClaim:
+          claimName: windows10-hdd-pvc
+      - containerDisk:
+          image: quay.io/kubevirt/virtio-container-disk
+        name: virtiocontainerdisk

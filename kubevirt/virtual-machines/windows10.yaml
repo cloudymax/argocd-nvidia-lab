@@ -29,6 +29,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: windows10-hdd-pvc
   namespace: windows10
+  annotations:
+    cdi.kubevirt.io/storage.bind.immediate.requested
 spec:
   accessModes:
     - ReadWriteOnce

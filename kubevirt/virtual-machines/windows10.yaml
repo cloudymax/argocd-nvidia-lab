@@ -10,7 +10,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: windows10-lb
-  namespace: vm0
+  namespace: windows10
 spec:
   externalTrafficPolicy: Local
   ipFamilies:

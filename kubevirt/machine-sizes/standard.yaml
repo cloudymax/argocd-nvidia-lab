@@ -2,7 +2,7 @@
 apiVersion: instancetype.kubevirt.io/v1alpha2
 kind: VirtualMachineClusterInstancetype
 metadata:
-  name: mini-standard
+  name: standard-micro
 spec:
   cpu:
     guest: 1
@@ -12,7 +12,7 @@ spec:
 apiVersion: instancetype.kubevirt.io/v1alpha2
 kind: VirtualMachineClusterInstancetype
 metadata:
-  name: small-standard
+  name: standard-small
 spec:
   cpu:
     guest: 2
@@ -22,7 +22,7 @@ spec:
 apiVersion: instancetype.kubevirt.io/v1alpha2
 kind: VirtualMachineClusterInstancetype
 metadata:
-  name: medium-standard
+  name: standard-medium
 spec:
   cpu:
     guest: 4
@@ -32,7 +32,7 @@ spec:
 apiVersion: instancetype.kubevirt.io/v1alpha2
 kind: VirtualMachineClusterInstancetype
 metadata:
-  name: large-standard
+  name: standard-large
 spec:
   cpu:
     guest: 8

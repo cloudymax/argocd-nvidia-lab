@@ -13,7 +13,7 @@ Standard instance sizing.
 
 ## High Memory
 
-Twice the amount of memory of the standard tier.
+Twice the amount of memory as the standard tier.
 
 | Name          | CPU   (vCores) | Memory  (GB)  |
 |---            |---           |---          |

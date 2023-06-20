@@ -1,0 +1,40 @@
+---
+apiVersion: instancetype.kubevirt.io/v1alpha2
+kind: VirtualMachineInstancetype
+metadata:
+  name: mini-highcpu
+spec:
+  cpu:
+    guest: 2
+  memory:
+    guest: 2Gi
+---
+apiVersion: instancetype.kubevirt.io/v1alpha2
+kind: VirtualMachineInstancetype
+metadata:
+  name: small-highcpu
+spec:
+  cpu:
+    guest: 4
+  memory:
+    guest: 4Gi
+---
+apiVersion: instancetype.kubevirt.io/v1alpha2
+kind: VirtualMachineInstancetype
+metadata:
+  name: medium-highcpu
+spec:
+  cpu:
+    guest: 8
+  memory:
+    guest: 8Gi
+---
+apiVersion: instancetype.kubevirt.io/v1alpha2
+kind: VirtualMachineInstancetype
+metadata:
+  name: large-highcpu
+spec:
+  cpu:
+    guest: 16
+  memory:
+    guest: 16Gi

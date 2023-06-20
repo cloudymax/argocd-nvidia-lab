@@ -1,3 +1,6 @@
+# High Memory machines: Num Cores == (GB RAM)/4
+
+# High CPU machines: Num Cores == GB RAM  
 ---
 apiVersion: instancetype.kubevirt.io/v1alpha2
 kind: VirtualMachineClusterInstancetype
@@ -38,6 +41,7 @@ spec:
     guest: 16
   memory:
     guest: 16Gi
+# Standard machines: Num Cores == (GB RAM)/2  
 ---
 apiVersion: instancetype.kubevirt.io/v1alpha2
 kind: VirtualMachineClusterInstancetype

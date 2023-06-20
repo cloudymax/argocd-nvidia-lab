@@ -2,6 +2,8 @@
 
 ## Standard
 
+Standard instance sizing.
+
 | Name          | CPU   (vCores) | Memory  (GB)  |
 |---            |---           |---          |
 |mini  |1             |  2          |
@@ -11,6 +13,8 @@
 
 ## High Memory
 
+Twice the amount of memory of the standard tier.
+
 | Name          | CPU   (vCores) | Memory  (GB)  |
 |---            |---           |---          |
 |mini  |1             |  4          |
@@ -19,6 +23,8 @@
 |large |8             |  32         |
 
 ## High CPU
+
+Twice the number of cores as the standard tier.
 
 | Name          | CPU   (vCores) | Memory  (GB)  |
 |---            |---           |---          |

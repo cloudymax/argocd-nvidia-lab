@@ -5,32 +5,31 @@ kind: Namespace
 metadata:
   name: windows10
 ---
-# Expose ports via a loadbalancer
+# Expose RDP port via a loadbalancer
 kind: Service
 apiVersion: v1
 metadata:
-  name: windows10-lb
+  name: windows10-rdp-lb
   namespace: windows10
 spec:
-  externalTrafficPolicy: Local
-  ipFamilies:
-    - IPv4
+  externalTrafficPolicy: Cluster
   ports:
-    - name: ssh
+    - name: rdp
       protocol: TCP
-      port: 22
-      targetPort: 22
+      port: 3389
+      targetPort: 3389
   type: LoadBalancer
   selector:
-    metallb-service: windows10
+    kubevirt.io/domain: windows10
 ---
+# This will be the disk we install windows on from the ISO
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: windows10-hdd-pvc
   namespace: windows10
   annotations:
-    cdi.kubevirt.io/storage.bind.immediate.requested
+    cdi.kubevirt.io/storage.bind.immediate.requested: "true"
 spec:
   accessModes:
     - ReadWriteOnce
@@ -42,6 +41,7 @@ apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
   name: windows10-vm
+  namespace: windows10
 spec:
   running: false
   template:
@@ -79,5 +79,5 @@ spec:
         persistentVolumeClaim:
           claimName: windows10-hdd-pvc
       - containerDisk:
-          image: quay.io/kubevirt/virtio-container-disk
+          image: quay.io/kubevirt/virtio-container-disk:v1.0.0-rc.1-amd64
         name: virtiocontainerdisk

@@ -46,12 +46,37 @@ spec:
   running: false
   template:
     metadata:
+      creationTimestamp: null
       labels:
         kubevirt.io/domain: windows10
     spec:
       domain:
+        clock:
+          timer:
+            hpet:
+              present: false
+            hyperv: {}
+            pit:
+              tickPolicy: delay
+            rtc:
+              tickPolicy: catchup
+          utc: {}
+        features:
+          smm: {}
+          kvm: {}
+          acpi: {}
+          apic: {}
+          hyperv:
+            relaxed: {}
+            spinlocks:
+              spinlocks: 8191
+            vapic: {}
+        firmware:
+          bootloader:
+            efi: {}
         cpu:
-          cores: 6
+          model: host-passthrough
+          cores: 4
         devices:
           disks:
           - bootOrder: 1
@@ -70,7 +95,7 @@ spec:
           type: q35
         resources:
           requests:
-            memory: 12G
+            memory: 8G
       volumes:
       - name: cdromiso
         persistentVolumeClaim:

@@ -6,10 +6,8 @@ metadata:
 spec:
   selector:
     app: console
-  type: NodePort # nodePort configuration
   ports:
     - name: http
       port: 9000
       targetPort: 9000
-      nodePort: 30036
       protocol: TCP

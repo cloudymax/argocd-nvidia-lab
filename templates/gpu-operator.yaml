@@ -18,6 +18,15 @@ spec:
     chart: gpu-operator
     repoURL: https://helm.ngc.nvidia.com/nvidia
     targetRevision: 22.9.2
+    helm:
+      skipCrds: false
+      values: |
+        master:
+          tolerations:
+          - key: "gpu"
+            operator: "Equal"
+            value: "true"
+            effect: "NoSchedule"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: gpu-operator

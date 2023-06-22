@@ -31,16 +31,16 @@ spec:
     chart: gpu-operator
     repoURL: https://helm.ngc.nvidia.com/nvidia
     targetRevision: 22.9.2
-    helm:
-      skipCrds: false
-      values: |
-        cdi: 
-          enabled: "false"
-          default: "false"
-        driver:
-          enabled: "true"
-        toolkit:
-          enabled: "true"
+ #   helm:
+ #     skipCrds: false
+ #     values: |
+ #       cdi: 
+ #         enabled: "true"
+ #         default: "false"
+ #       driver:
+ #         enabled: "true"
+ #       toolkit:
+ #         enabled: "true"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: gpu-operator

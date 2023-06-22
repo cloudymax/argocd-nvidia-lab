@@ -21,12 +21,13 @@ spec:
     helm:
       skipCrds: false
       values: |
-        master:
-          tolerations:
-          - key: "gpu"
-            operator: "Equal"
-            value: "true"
-            effect: "NoSchedule"
+        cdi: 
+          enabled: "false"
+          default: "false"
+        driver:
+          enabled: "true"
+        toolkit:
+          enabled: "true"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: gpu-operator

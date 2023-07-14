@@ -33,7 +33,7 @@ metadata:
 spec:
   source:
     pvc:
-      namespace: debian12
+      namespace: default
       name: debian12-pvc
   pvc:
     accessModes:

@@ -135,6 +135,42 @@ spec:
           claimName: glx-root-vol
 ---
 apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dshm
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 8Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: glx-cache-vol
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 8Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: xgl-root-vol
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 8Gi
+---
+apiVersion: v1
 kind: Service
 metadata:
   name: glx-service

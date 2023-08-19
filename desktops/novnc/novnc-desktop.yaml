@@ -15,10 +15,8 @@ spec:
     spec:
       containers:
       - name: remote-desktop
-        image: fredblgr/ubuntu-novnc:22.04
+        image:  deserializeme/ubuntu-xfce
         env:
-        - name: "HTTP_PASSWORD"
-          value: "demopass123"
         - name: "RESOLUTION"
           value: "1920x1080"
         ports:

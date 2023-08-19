@@ -161,7 +161,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: xgl-root-vol
+  name: glx-root-vol
 spec:
   accessModes:
     - ReadWriteOnce

@@ -25,7 +25,7 @@ spec:
         - name: "HTTP_PASSWORD"
           value: "demopass123"
         - name: "RESOLUTION"
-          value: "1366x768"
+          value: "1920x1080"
         ports:
         - containerPort: 80
         resources:
@@ -33,7 +33,7 @@ spec:
             memory: "1024Mi"
             cpu: "1000m"
           limits:
-            memory: "4000Mi"
+            memory: "8000Mi"
             cpu: "4000m"
             nvidia.com/gpu: 1
 ---
@@ -56,8 +56,8 @@ metadata:
   name: remote-desktop-ingress
   namespace: novnc
   annotations:
-    nginx.ingress.kubernetes.io/auth-signin: "https://vouch.cloudydev.net/login?url=$scheme://$http_host$request_uri&vouch-failcount=$auth_resp_failcount&X-Vouch-Token=$auth_resp_jwt&error=$auth_resp_err"
-    nginx.ingress.kubernetes.io/auth-url: https://vouch.cloudydev.net/validate
+    nginx.ingress.kubernetes.io/auth-signin: "https://vouch.buildstar.online/login?url=$scheme://$http_host$request_uri&vouch-failcount=$auth_resp_failcount&X-Vouch-Token=$auth_resp_jwt&error=$auth_resp_err"
+    nginx.ingress.kubernetes.io/auth-url: https://vouch.buildstar.online/validate
     nginx.ingress.kubernetes.io/auth-response-headers: X-Vouch-User
     nginx.ingress.kubernetes.io/auth-snippet: |
       auth_request_set $auth_resp_jwt $upstream_http_x_vouch_jwt;
@@ -66,11 +66,11 @@ metadata:
 spec:
   tls:
     - hosts:
-      - novnc.cloudydev.net
+      - novnc.buildstar.online
       secretName: novnc-tls
   ingressClassName: nginx
   rules:
-  - host: novnc.cloudydev.net
+  - host: novnc.buildstar.online
     http:
       paths:
       - path: /

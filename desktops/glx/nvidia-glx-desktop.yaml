@@ -130,7 +130,7 @@ spec:
       - name: glx-cache-vol
         persistentVolumeClaim:
           claimName: glx-cache-vol
-      - name: xgl-root-vol
+      - name: glx-root-vol
         persistentVolumeClaim:
           claimName: glx-root-vol
 ---

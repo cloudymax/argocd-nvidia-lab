@@ -128,11 +128,9 @@ spec:
         persistentVolumeClaim:
           claimName: dshm
       - name: glx-cache-vol
-        emptyDir: {}
         persistentVolumeClaim:
           claimName: glx-cache-vol
       - name: xgl-root-vol
-        emptyDir: {}
         persistentVolumeClaim:
           claimName: glx-root-vol
 ---

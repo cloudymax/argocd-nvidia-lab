@@ -124,16 +124,14 @@ spec:
           name: egl-root-vol
       volumes:
       - name: dshm
-        emptyDir:
-          medium: Memory
+        persistentVolumeClaim:
+          claimName: dshm
       - name: egl-cache-vol
-        emptyDir: {}
-#        persistentVolumeClaim:
-#          claimName: egl-cache-vol
+        persistentVolumeClaim:
+          claimName: egl-cache-vol
       - name: egl-root-vol
-        emptyDir: {}
-#        persistentVolumeClaim:
-#          claimName: egl-root-vol
+        persistentVolumeClaim:
+          claimName: egl-root-vol
 ---
 apiVersion: v1
 kind: Service

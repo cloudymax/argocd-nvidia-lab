@@ -92,6 +92,7 @@ metadata:
   name: glx-ingress
   namespace: glx
   annotations:
+    kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     nginx.ingress.kubernetes.io/auth-signin: "https://vouch.buildstar.online/login?url=$scheme://$http_host$request_uri&vouch-failcount=$auth_resp_failcount&X-Vouch-Token=$auth_resp_jwt&error=$auth_resp_err"
     nginx.ingress.kubernetes.io/auth-url: https://vouch.buildstar.online/validate

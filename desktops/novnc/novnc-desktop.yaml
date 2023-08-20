@@ -20,7 +20,6 @@ spec:
         app: remote-desktop
     spec:
       containers:
-      runtimeClassName: nvidia
       - name: remote-desktop
         image: deserializeme/ubuntu-xfce
         env:

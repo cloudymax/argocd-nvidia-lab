@@ -1,6 +1,4 @@
-# This Source Code Form is subject to the terms of the Mozilla Public
-# License, v. 2.0. If a copy of the MPL was not distributed with this
-# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -16,126 +14,67 @@ spec:
         app: xgl
     spec:
       hostname: xgl
-      # Uncomment the below line to disable network isolation for WebRTC connectivity, may show an error if disallowed by the cluster
       hostNetwork: true
       containers:
-      - name: xgl
-        image: ghcr.io/selkies-project/nvidia-glx-desktop:latest
-        securityContext:
-          allowPrivilegeEscalation: true
-        env:
-        - name: TZ
-          value: "UTC"
-        - name: SIZEW
-          value: "1920"
-        - name: SIZEH
-          value: "1080"
-        - name: REFRESH
-          value: "60"
-        - name: DPI
-          value: "96"
-        - name: CDEPTH
-          value: "24"
-        # Change to DP-0 or any other DP-* port for larger resolution support if you are NOT using datacenter GPUs
-        - name: VIDEO_PORT
-          value: "DFP"
-        # Choose either `value:` or `secretKeyRef:` but not both at the same time
-        - name: PASSWD
-          value: "mypasswd"
-#          valueFrom:
-#            secretKeyRef:
-#              name: my-pass
-#              key: my-pass
-        # Uncomment this to enable noVNC, disabing selkies-gstreamer and ignoring all its parameters except `BASIC_AUTH_PASSWORD`, which will be used for authentication with noVNC, `BASIC_AUTH_PASSWORD` defaults to `PASSWD` if not provided
-#        - name: NOVNC_ENABLE
-#          value: "true"
-        # Additional view-only password only applicable to the noVNC interface, choose either `value:` or `secretKeyRef:` but not both at the same time
-#        - name: NOVNC_VIEWPASS
-#          value: "mypasswd"
-#          valueFrom:
-#            secretKeyRef:
-#              name: my-pass
-#              key: my-pass
-        ###
-        # selkies-gstreamer parameters, for additional configurations see lines that start with "parser.add_argument" in https://github.com/selkies-project/selkies-gstreamer/blob/master/src/selkies_gstreamer/__main__.py
-        ###
-        # Change `WEBRTC_ENCODER` to `x264enc`, `vp8enc`, or `vp9enc` if your GPU doesn't support `H.264 (AVCHD)` under the `NVENC - Encoding` section in https://developer.nvidia.com/video-encode-and-decode-gpu-support-matrix-new
-        - name: WEBRTC_ENCODER
-          value: "nvh264enc"
-        - name: WEBRTC_ENABLE_RESIZE
-          value: "false"
-        - name: ENABLE_AUDIO
-          value: "true"
-        - name: ENABLE_BASIC_AUTH
-          value: "false"
-        # Defaults to `PASSWD` if unspecified, choose either `value:` or `secretKeyRef:` but not both at the same time
-#        - name: BASIC_AUTH_PASSWORD
-#          value: "mypasswd"
-#          valueFrom:
-#            secretKeyRef:
-#              name: my-pass
-#              key: my-pass
-        ###
-        # Uncomment below to use a TURN server for improved network compatibility
-        ###
-#        - name: TURN_HOST
-#          value: "turn.example.com"
-#        - name: TURN_PORT
-#          value: "3478"
-        # Provide only `TURN_SHARED_SECRET` for time-limited shared secret authentication or both `TURN_USERNAME` and `TURN_PASSWORD` for legacy long-term authentication, but do not provide both authentication methods at the same time
-#        - name: TURN_SHARED_SECRET
-#          valueFrom:
-#            secretKeyRef:
-#              name: turn-shared-secret
-#              key: turn-shared-secret
-#        - name: TURN_USERNAME
-#          value: "username"
-        # Choose either `value:` or `secretKeyRef:` but not both at the same time
-#        - name: TURN_PASSWORD
-#          value: "mypasswd"
-#          valueFrom:
-#            secretKeyRef:
-#              name: turn-password
-#              key: turn-password
-        # Change to `tcp` if the UDP protocol is throttled or blocked in your client network, or when the TURN server does not support UDP
-#        - name: TURN_PROTOCOL
-#          value: "udp"
-        # You need a valid hostname and a certificate from authorities such as ZeroSSL (Let's Encrypt may have issues) to enable this
-#        - name: TURN_TLS
-#          value: "false"
-        stdin: true
-        tty: true
-        ports:
-        - name: http
-          containerPort: 8080
-          protocol: TCP
-        resources:
-          limits:
-            memory: 64Gi
-            cpu: "16"
-            nvidia.com/gpu: 1
-          requests:
-            memory: 100Mi
-            cpu: 100m
-        volumeMounts:
-        - mountPath: /dev/shm
-          name: dshm
-        - mountPath: /cache
-          name: xgl-cache-vol
-        - mountPath: /home/user
-          name: xgl-root-vol
+        - name: xgl
+          image: ghcr.io/selkies-project/nvidia-glx-desktop:latest
+          securityContext:
+            allowPrivilegeEscalation: true
+          env:
+            - name: TZ
+              value: UTC
+            - name: SIZEW
+              value: "1920"
+            - name: SIZEH
+              value: "1080"
+            - name: REFRESH
+              value: "60"
+            - name: DPI
+              value: "96"
+            - name: CDEPTH
+              value: "24"
+            - name: VIDEO_PORT
+              value: DFP
+            - name: PASSWD
+              value: mypasswd
+            - name: WEBRTC_ENCODER
+              value: nvh264enc
+            - name: WEBRTC_ENABLE_RESIZE
+              value: "false"
+            - name: ENABLE_AUDIO
+              value: "true"
+            - name: ENABLE_BASIC_AUTH
+              value: "false"
+          stdin: true
+          tty: true
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              memory: 64Gi
+              cpu: "16"
+              nvidia.com/gpu: 1
+            requests:
+              memory: 100Mi
+              cpu: 100m
+          volumeMounts:
+            - mountPath: /dev/shm
+              name: dshm
+            - mountPath: /cache
+              name: xgl-cache-vol
+            - mountPath: /home/user
+              name: xgl-root-vol
       volumes:
-      - name: dshm
-        emptyDir:
-          medium: Memory
-      - name: xgl-cache-vol
-        emptyDir: {}
-#        persistentVolumeClaim:
-#          claimName: xgl-cache-vol
-      - name: xgl-root-vol
-        emptyDir: {}
-#        persistentVolumeClaim:
-#          claimName: xgl-root-vol
+        - name: dshm
+          emptyDir:
+            medium: Memory
+        - name: xgl-cache-vol
+          emptyDir: {}
+        - name: xgl-root-vol
+          emptyDir: {}
+
 ---
 apiVersion: v1
 kind: Service
@@ -145,8 +84,9 @@ spec:
   selector:
     app: xgl
   ports:
-  - port: 5431
-    targetPort: 8080
+    - port: 5431
+      targetPort: 8080
+
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -155,20 +95,20 @@ metadata:
   namespace: glx
   annotations:
     kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   tls:
     - hosts:
-      - glx.cooldogs.net
+        - glx.cooldogs.net
       secretName: novnc-tls
   rules:
-  - host: glx.buildstar.online
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: glx-service
-            port:
-              number: 5431
+    - host: glx.buildstar.online
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: glx-service
+                port:
+                  number: 5431

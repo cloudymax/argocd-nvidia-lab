@@ -24,7 +24,7 @@ spec:
       - name: remote-desktop
         image: deserializeme/ubuntu-xfce
         command: [ "/bin/bash", "-c", "--" ]
-        args: [ "while true; do sleep 30; done;" ]
+        args: [ "/entrypoint.sh" ]
         env:
         - name: "RESOLUTION"
           value: "1920x1080"

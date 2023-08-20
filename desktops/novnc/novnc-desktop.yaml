@@ -23,7 +23,6 @@ spec:
       containers:
       - name: remote-desktop
         image: deserializeme/ubuntu-xfce
-        command: [ "sudo", "/bin/bash", "-c", "/entrypoint.sh" ]
         env:
         - name: "RESOLUTION"
           value: "1920x1080"

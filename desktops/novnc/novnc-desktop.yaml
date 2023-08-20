@@ -23,6 +23,7 @@ spec:
       containers:
       - name: remote-desktop
         image: deserializeme/ubuntu-xfce
+        args: ["/bin/bash"]
         env:
         - name: "RESOLUTION"
           value: "1920x1080"

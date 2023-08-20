@@ -134,6 +134,8 @@ spec:
         emptyDir: {}
 #        persistentVolumeClaim:
 #          claimName: xgl-root-vol
+      securityContext:
+        allowPrivilegeEscalation: true
 ---
 apiVersion: v1
 kind: Service

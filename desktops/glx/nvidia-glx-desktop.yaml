@@ -74,7 +74,6 @@ spec:
           emptyDir: {}
         - name: xgl-root-vol
           emptyDir: {}
-
 ---
 apiVersion: v1
 kind: Service
@@ -86,7 +85,6 @@ spec:
   ports:
     - port: 5431
       targetPort: 8080
-
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -106,7 +104,7 @@ spec:
   tls:
     - hosts:
         - glx.buildstar.online
-      secretName: novnc-tls
+      secretName: glx-tls
   rules:
     - host: glx.buildstar.online
       http:

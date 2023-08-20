@@ -20,7 +20,7 @@ spec:
       hostNetwork: true
       containers:
       - name: xgl
-        image: ghcr.io/selkies-project/nvidia-egl-desktop:latest
+        image: ghcr.io/selkies-project/nvidia-glx-desktop:latest
         env:
         - name: TZ
           value: "UTC"
@@ -160,7 +160,7 @@ spec:
       - glx.cooldogs.net
       secretName: novnc-tls
   rules:
-  - host: glx.cooldogs.net
+  - host: glx.buildstar.online
     http:
       paths:
       - path: /

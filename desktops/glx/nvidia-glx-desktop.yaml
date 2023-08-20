@@ -19,10 +19,10 @@ spec:
       # Uncomment the below line to disable network isolation for WebRTC connectivity, may show an error if disallowed by the cluster
       hostNetwork: true
       containers:
-        securityContext:
-          allowPrivilegeEscalation: true
       - name: xgl
         image: ghcr.io/selkies-project/nvidia-glx-desktop:latest
+        securityContext:
+          allowPrivilegeEscalation: true
         env:
         - name: TZ
           value: "UTC"

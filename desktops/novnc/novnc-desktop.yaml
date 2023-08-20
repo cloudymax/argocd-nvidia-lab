@@ -23,7 +23,8 @@ spec:
       containers:
       - name: remote-desktop
         image: deserializeme/ubuntu-xfce
-        args: ["/bin/bash"]
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "while true; do sleep 30; done;" ]
         env:
         - name: "RESOLUTION"
           value: "1920x1080"

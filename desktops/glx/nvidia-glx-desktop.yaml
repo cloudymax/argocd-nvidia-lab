@@ -141,7 +141,7 @@ metadata:
   name: glx-service
 spec:
   selector:
-    app: glx
+    app: xgl
   ports:
   - port: 5431
     targetPort: 8080

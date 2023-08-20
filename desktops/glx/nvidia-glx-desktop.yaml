@@ -120,19 +120,21 @@ spec:
         - mountPath: /dev/shm
           name: dshm
         - mountPath: /cache
-          name: glx-cache-vol
+          name: xgl-cache-vol
         - mountPath: /home/user
-          name: glx-root-vol
+          name: xgl-root-vol
       volumes:
       - name: dshm
-        persistentVolumeClaim:
-          claimName: dshm
-      - name: glx-cache-vol
-        persistentVolumeClaim:
-          claimName: glx-cache-vol
-      - name: glx-root-vol
-        persistentVolumeClaim:
-          claimName: glx-root-vol
+        emptyDir:
+          medium: Memory
+      - name: xgl-cache-vol
+        emptyDir: {}
+#        persistentVolumeClaim:
+#          claimName: xgl-cache-vol
+      - name: xgl-root-vol
+        emptyDir: {}
+#        persistentVolumeClaim:
+#          claimName: xgl-root-vol
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

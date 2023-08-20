@@ -18,10 +18,10 @@ spec:
     spec:
       hostname: glx
       # Uncomment the below line to disable network isolation for WebRTC connectivity, may show an error if disallowed by the cluster
-      hostNetwork: false
+      hostNetwork: true
       containers:
       - name: xgl
-        image: ghcr.io/selkies-project/nvidia-glx-desktop:latest
+        image: ghcr.io/selkies-project/nvidia-egl-desktop:latest
         env:
         - name: TZ
           value: "UTC"

@@ -37,7 +37,7 @@ spec:
           value: "24"
         # Change to DP-0 or any other DP-* port for larger resolution support if you are NOT using datacenter GPUs
         - name: VIDEO_PORT
-          value: "DP-0"
+          value: "DFP"
         # Choose either `value:` or `secretKeyRef:` but not both at the same time
         - name: PASSWD
           value: "mypasswd"
@@ -66,7 +66,7 @@ spec:
         - name: ENABLE_AUDIO
           value: "true"
         - name: ENABLE_BASIC_AUTH
-          value: "true"
+          value: "false"
         # Defaults to `PASSWD` if unspecified, choose either `value:` or `secretKeyRef:` but not both at the same time
 #        - name: BASIC_AUTH_PASSWORD
 #          value: "mypasswd"

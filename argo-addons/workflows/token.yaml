@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: client-account-token
+  namespace: argo
   annotations:
     kubernetes.io/service-account.name: client
 type: kubernetes.io/service-account-token

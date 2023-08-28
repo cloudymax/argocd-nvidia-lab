@@ -13,7 +13,7 @@ spec:
     path: argo-addons/workflows/
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: argo-workflows
+    namespace: argocd
   syncPolicy:
     syncOptions:
       - CreateNamespace=true

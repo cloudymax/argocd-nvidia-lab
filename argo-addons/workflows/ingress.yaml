@@ -5,8 +5,9 @@ metadata:
   namespace: argo
   annotations:
     kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/backend-protocol: https 
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/auth-signin: "https://vouch.buildstar.online/login?url=$scheme://$http_host$request_uri&vouch-failcount=$auth_resp_failcount&X-Vouch-Token=$auth_resp_jwt&error=$auth_resp_err"
     nginx.ingress.kubernetes.io/auth-url: https://vouch.buildstar.online/validate
     nginx.ingress.kubernetes.io/auth-response-headers: X-Vouch-User
@@ -23,10 +24,7 @@ spec:
   - host: workflows.buildstar.online
     http:
       paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: argo-server
-            port:
-              number: 2746
+        - backend:
+            serviceName: argo-server
+            servicePort: 2746
+          path: /argo(/|$)(.*)

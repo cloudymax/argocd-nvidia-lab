@@ -19,7 +19,6 @@ spec:
       labels:
         app: remote-desktop
     spec:
-      runtimeClassName: nvidia
       containers:
       - name: remote-desktop
         image: deserializeme/ubuntu-xfce
@@ -35,7 +34,6 @@ spec:
           limits:
             memory: "8000Mi"
             cpu: "4000m"
-            nvidia.com/gpu: 1
 ---
 apiVersion: v1
 kind: Service
